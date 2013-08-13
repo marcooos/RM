@@ -10,4 +10,13 @@ package rm_desbravador.validadores;
  */
 public class TipoCampoNU {
     
+    public String gerarTipoCampoNU(int tamanho) {
+        String retorno = "";
+        int contador = 0;
+        while (contador < tamanho) {
+            retorno = retorno + " ";
+            contador++;
+        }        
+        return retorno;
+    }
 }

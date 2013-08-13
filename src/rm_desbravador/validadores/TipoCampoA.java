@@ -10,4 +10,14 @@ package rm_desbravador.validadores;
  */
 public class TipoCampoA {
     
+    public String gerarTipoCampoA(String campo, int tamanho) {
+        String retorno = "";
+        int contador = campo.length();
+        while (contador < tamanho) {
+            retorno = retorno + " ";
+            contador++;
+        }
+        retorno = campo + retorno;
+        return retorno;
+    }
 }

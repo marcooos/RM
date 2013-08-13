@@ -10,4 +10,7 @@ package rm_desbravador.validadores;
  */
 public class TipoCampoF {
     
+    public String gerarTipoCampoF(String campo) {
+        return campo;
+    }
 }

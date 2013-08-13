@@ -10,4 +10,26 @@ package rm_desbravador.validadores;
  */
 public class TipoCampoVF {
     
+    public String gerarTipoCampoVF(double campo, int tamanho) {
+        String retorno = "";
+        int contador = String.valueOf(campo).length();
+        while (contador < tamanho) {
+            retorno = retorno + "0";
+            contador++;
+        }
+        retorno = retorno + campo;
+        return retorno;
+    }
+    
+    public String gerarTipoCampoVFZerado(int tamanho) {
+        String retorno = "";
+        double valorPadrao = 0.00;
+        int contador = String.valueOf(valorPadrao).length();
+        while (contador < tamanho) {
+            retorno = retorno + "0";
+            contador++;
+        }
+        retorno = retorno + valorPadrao;
+        return retorno;
+    }
 }
