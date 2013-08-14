@@ -20,7 +20,7 @@ public class GerarClienteDao {
     public ResultSet listaDeClientes() {
         Connection con;
         Conexao abrirCon = new Conexao();
-        String sql = "select * from cadempresa limit 1";
+        String sql = "select * from cadempresa limit 2";
         con = abrirCon.getConexao(
                 PropertiesLoaderImpl.getValor("servidor"),
                 PropertiesLoaderImpl.getValor("porta"),
