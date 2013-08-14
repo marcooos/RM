@@ -4,10 +4,11 @@
  */
 package rm_desbravador;
 
-import java.util.Date;
-import rm_desbravador.utilitarios.Conexao;
-import rm_desbravador.utilitarios.PropertiesLoaderImpl;
-import rm_desbravador.validadores.TipoCampoData;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import rm_desbravador.dao.GerarClienteDao;
+import rm_desbravador.dao.GerarFornecedorDao;
+import rm_desbravador.utilitarios.GravarArquivo;
 
 /**
  *
@@ -18,19 +19,26 @@ public class RM_Desbravador {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
-        boolean testeCon;
-        Conexao con = new Conexao();
-        TipoCampoData tn = new TipoCampoData();
-        testeCon = con.getConexao(
-                PropertiesLoaderImpl.getValor("servidor"),
-                PropertiesLoaderImpl.getValor("porta"),
-                PropertiesLoaderImpl.getValor("banco"),
-                PropertiesLoaderImpl.getValor("usuario"),
-                PropertiesLoaderImpl.getValor("senha"));
-        System.out.println(testeCon + "\n" + con.getMensagemRet());
-        System.out.println(
-                tn.gerarTipoCampoData(new Date("January 2, 1970, 00:00:00 GMT")) + "\n"
-                + tn.gerarTipoCampoDataZerado());
+    public static void main(String[] args) {        
+        String mensagem = "";
+        try {
+            GerarClienteDao clienteDao = new GerarClienteDao();
+            GerarFornecedorDao fornecedorDao = new GerarFornecedorDao();
+            ResultSet rsCli = clienteDao.listaDeClientes();
+            ResultSet rsFor = fornecedorDao.listaDeFornecedores();
+            while (rsCli.next()) {
+                String nome = rsCli.getString("nomeempresa");
+                mensagem = mensagem + nome + "\n";
+            }                
+                mensagem = mensagem + "----\n";
+            while (rsFor.next()) {
+                String nome = rsFor.getString("nomefornec");
+                mensagem = mensagem + nome;
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+        GravarArquivo gravar = new GravarArquivo();
+        gravar.gravarArquivoTexto(mensagem, "teste", "/Users/marcos/Backup");
     }
 }

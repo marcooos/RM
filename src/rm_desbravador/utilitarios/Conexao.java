@@ -15,6 +15,7 @@ import java.sql.SQLException;
 public class Conexao {
 
     String mensagemRet;
+    Connection connection;
 
     public Conexao() {
         mensagemRet = "";
@@ -24,7 +25,7 @@ public class Conexao {
         return mensagemRet;
     }
 
-    public boolean getConexao(String servidor, String porta, String banco, String usuario, String senha) {
+    public Connection getConexao(String servidor, String porta, String banco, String usuario, String senha) {
 
         mensagemRet = "-------- PostgreSQL "
                 + "JDBC teste de conexão ------------";
@@ -37,14 +38,14 @@ public class Conexao {
             mensagemRet = "";
             mensagemRet = "Driver JDBC não localizado "
                     + "Inclua no seu path library!" + e;
-            return false;
+            return null;
 
         }
 
         mensagemRet = "";
         mensagemRet = "PostgreSQL JDBC Driver Registrado!";
 
-        Connection connection = null;
+        connection = null;
 
         try {
 
@@ -57,18 +58,18 @@ public class Conexao {
             mensagemRet = "";
             mensagemRet = "Conexão Falhou" + e;
 
-            return false;
+            return null;
 
         }
 
         if (connection != null) {
             mensagemRet = "";
             mensagemRet = "Conectado a base de dados!";
-            return true;
+            return connection;
         } else {
             mensagemRet = "";
             mensagemRet = "Falha na conexão!";
-            return false;
+            return null;
         }
     }
 }
