@@ -9,18 +9,23 @@ package rm_desbravador.validadores;
  * @author marcos
  */
 public class TipoCampoVF {
-    
+
     public String gerarTipoCampoVF(double campo, int tamanho) {
         String retorno = "";
-        int contador = String.valueOf(campo).length();
-        while (contador < tamanho) {
-            retorno = retorno + "0";
-            contador++;
+        try {
+            int contador = String.valueOf(campo).length();
+            while (contador < tamanho) {
+                retorno = retorno + "0";
+                contador++;
+            }
+            retorno = retorno + campo;
+            return retorno;
+        } catch (NullPointerException ex) {
+            System.out.println(ex);
+            return gerarTipoCampoVFZerado(tamanho);
         }
-        retorno = retorno + campo;
-        return retorno;
     }
-    
+
     public String gerarTipoCampoVFZerado(int tamanho) {
         String retorno = "";
         double valorPadrao = 0.00;

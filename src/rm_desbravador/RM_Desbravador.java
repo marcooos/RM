@@ -18,6 +18,6 @@ public class RM_Desbravador {
      */
     public static void main(String[] args) {
         GerarArquivoCliente gerarArquivoCliente = new GerarArquivoCliente();
-        System.out.println(gerarArquivoCliente.gerarArquivoCliente());
+        System.out.println(gerarArquivoCliente.gerarArquivoCliente());                
     }
 }

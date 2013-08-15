@@ -16,11 +16,16 @@ public class TipoCampoData {
 
     public String gerarTipoCampoData(Date data) {
         GregorianCalendar gc = new GregorianCalendar();
-        gc.setTime(data);        
-        SimpleDateFormat dataFormatada = new SimpleDateFormat("dd/MM/yyyy");
-        return dataFormatada.format(gc.getTime());
+        try {
+            gc.setTime(data);
+            SimpleDateFormat dataFormatada = new SimpleDateFormat("dd/MM/yyyy");
+            return dataFormatada.format(gc.getTime());
+        } catch (NullPointerException ex) {
+            System.out.println(ex);
+            return gerarTipoCampoDataZerado();
+        }
     }
-    
+
     public String gerarTipoCampoDataZerado() {
         return "01/01/1989";
     }

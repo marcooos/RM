@@ -45,7 +45,84 @@ public class GerarLinhaClienteC {
             //Cliente (1)
             mensagem = mensagem + tCN.gerarTipoCampoN(1, 5);
             //Não utilizado
-            mensagem = mensagem + tCNU.gerarTipoCampoNU(40);            
+            mensagem = mensagem + tCNU.gerarTipoCampoNU(40);
+            //Numero
+            mensagem = mensagem + tCA.gerarTipoCampoA(rs.getString("complementonr"), 8);
+            //Complemento
+            mensagem = mensagem + tCA.gerarTipoCampoA(rs.getString("complemento"), 20);
+            //Não utilizado
+            mensagem = mensagem + tCNU.gerarTipoCampoNU(20);
+            //Não utilizado
+            mensagem = mensagem + tCNU.gerarTipoCampoNU(32);
+            //Estado
+            mensagem = mensagem + tCA.gerarTipoCampoA(rs.getString("estado"), 2);
+            //Estado
+            mensagem = mensagem + tCA.gerarTipoCampoA(rs.getString("cep"), 9);
+            //Telefone
+            mensagem = mensagem + tCA.gerarTipoCampoA(rs.getString("telefone"), 15);
+            //Não utilizado
+            mensagem = mensagem + tCNU.gerarTipoCampoNU(40);
+            //Número do pagamento
+            mensagem = mensagem + tCNU.gerarTipoCampoNU(8);
+            //Complemento do pagamento
+            mensagem = mensagem + tCNU.gerarTipoCampoNU(20);            
+            //Não utilizado
+            mensagem = mensagem + tCNU.gerarTipoCampoNU(20);
+            //Cidade do pagamento
+            mensagem = mensagem + tCA.gerarTipoCampoA(rs.getString("cobcidade"),32);            
+            //Estado do pagamento
+            mensagem = mensagem + tCA.gerarTipoCampoA(rs.getString("cobestado"),2);
+            //CEP do pagamento
+            mensagem = mensagem + tCA.gerarTipoCampoA(rs.getString("cobcep"),9);
+            //Telefone do pagamento
+            mensagem = mensagem + tCA.gerarTipoCampoA(rs.getString("cobfone"),15);
+            //Não utilizado
+            mensagem = mensagem + tCNU.gerarTipoCampoNU(40);
+            //Número entrega
+            mensagem = mensagem + tCA.gerarTipoCampoA(rs.getString("nroendcorresp"),8);
+            //Complemento entrega
+            mensagem = mensagem + tCNU.gerarTipoCampoNU(20);
+            //Não utilizado
+            mensagem = mensagem + tCNU.gerarTipoCampoNU(20);
+            //Cidade entrega
+            mensagem = mensagem + tCA.gerarTipoCampoA(rs.getString("cidadecorresp"),32);            
+            //Estado entrega
+            mensagem = mensagem + tCA.gerarTipoCampoA(rs.getString("estadocorresp"),2);
+            //CEP entrega
+            mensagem = mensagem + tCA.gerarTipoCampoA(rs.getString("cepcorresp"),9);
+            //Telefone entrega
+            mensagem = mensagem + tCA.gerarTipoCampoA(rs.getString("telefone"),15);
+            //Fax
+            mensagem = mensagem + tCA.gerarTipoCampoA(rs.getString("fax"),15);
+            //Celular
+            mensagem = mensagem + tCNU.gerarTipoCampoNU(15);
+            //E-mail
+            mensagem = mensagem + tCA.gerarTipoCampoA(rs.getString("email"),60);
+            //Contato
+            mensagem = mensagem + tCNU.gerarTipoCampoNU(40);
+            //Tipo de cliente/Fornecedor
+            mensagem = mensagem + tCNU.gerarTipoCampoNU(25);
+            //Ativo (0 - Não / 1 - Sim)
+            mensagem = mensagem + tCA.gerarTipoCampoA("1",5);
+            //Limite de crédito
+            mensagem = mensagem + tCVF.gerarTipoCampoVFZerado(10);
+            //Não utilizado
+            mensagem = mensagem + tCNU.gerarTipoCampoNU(10);
+            //Valor último lançamento
+            mensagem = mensagem + tCVF.gerarTipoCampoVFZerado(10);
+            //Não utilizado
+            mensagem = mensagem + tCNU.gerarTipoCampoNU(5);
+            //Não utilizado
+            mensagem = mensagem + tCNU.gerarTipoCampoNU(10);
+            //Não utilizado
+            mensagem = mensagem + tCNU.gerarTipoCampoNU(10);
+            //Não utilizado
+            mensagem = mensagem + tCNU.gerarTipoCampoNU(10);
+            //Não utilizado
+            mensagem = mensagem + tCNU.gerarTipoCampoNU(10);
+            //Não utilizado
+            mensagem = mensagem + tCNU.gerarTipoCampoNU(10);
+            
         } catch (SQLException ex) {
             System.out.println(ex);
         }
