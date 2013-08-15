@@ -20,7 +20,12 @@ public class GerarClienteDao {
     public ResultSet listaDeClientes() {
         Connection con;
         Conexao abrirCon = new Conexao();
-        String sql = "select * from cadempresa limit 2";
+        String sql = "select codempresa,nomeempresa,razaosocial,cgc,inscest,"
+                + "complementonr,email,complemento,estado,cep,telefone, cobcidade,"
+                + "cobestado,cobcep, cobfone, nroendcorresp,cidadecorresp,"
+                + "estadocorresp,cepcorresp,fax,dtfunda,inscmunicipal,tipoemp,pais,"
+                + "codibge"
+                + " from cadempresa limit 2";
         con = abrirCon.getConexao(
                 PropertiesLoaderImpl.getValor("servidor"),
                 PropertiesLoaderImpl.getValor("porta"),
