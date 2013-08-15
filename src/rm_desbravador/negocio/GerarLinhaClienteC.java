@@ -26,18 +26,26 @@ public class GerarLinhaClienteC {
         TipoCampoN tCN = new TipoCampoN();
         TipoCampoNU tCNU = new TipoCampoNU();
         TipoCampoVF tCVF = new TipoCampoVF();
-        String mensagem = "";        
+        String mensagem = "";
         try {
-            while (rs.next()) {
-                mensagem = mensagem + tCF.gerarTipoCampoF("C");
-                mensagem = mensagem + tCN.gerarTipoCampoN(0, 5);
-                mensagem = mensagem + tCA.gerarTipoCampoA(rs.getString("codempresa"), 25);
-                mensagem = mensagem + tCA.gerarTipoCampoA(rs.getString("nomeempresa"), 60);
-                mensagem = mensagem + tCA.gerarTipoCampoA(rs.getString("razaosocial"), 60);
-                mensagem = mensagem + tCA.gerarTipoCampoA(rs.getString("cgc"), 20);
-                mensagem = mensagem + tCA.gerarTipoCampoA(rs.getString("inscest"), 20);
-                mensagem = mensagem + "\n";
-            }
+            //Fixo
+            mensagem = mensagem + tCF.gerarTipoCampoF("C");
+            //Coligada
+            mensagem = mensagem + tCN.gerarTipoCampoN(0, 5);
+            //Código do cliente
+            mensagem = mensagem + tCA.gerarTipoCampoA(rs.getString("codempresa"), 25);
+            //Nome Fantasia
+            mensagem = mensagem + tCA.gerarTipoCampoA(rs.getString("nomeempresa"), 60);
+            //Razão Social
+            mensagem = mensagem + tCA.gerarTipoCampoA(rs.getString("razaosocial"), 60);
+            //CGC
+            mensagem = mensagem + tCA.gerarTipoCampoA(rs.getString("cgc"), 20);
+            //Inscrição Estadual
+            mensagem = mensagem + tCA.gerarTipoCampoA(rs.getString("inscest"), 20);
+            //Cliente (1)
+            mensagem = mensagem + tCN.gerarTipoCampoN(1, 5);
+            //Não utilizado
+            mensagem = mensagem + tCNU.gerarTipoCampoNU(40);            
         } catch (SQLException ex) {
             System.out.println(ex);
         }

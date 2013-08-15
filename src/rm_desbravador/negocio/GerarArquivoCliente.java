@@ -28,8 +28,10 @@ public class GerarArquivoCliente {
             ResultSet rsFor = fornecedorDao.listaDeFornecedores();            
             //Montar Arquivo Clinte
             //LinhaC
-            mensagem = mensagem + gerarLinhaClienteC.gerarLinhaClienteC(rsCli)+"\n";            
-            
+            while(rsCli.next()) {
+                mensagem = mensagem + gerarLinhaClienteC.gerarLinhaClienteC(rsCli)+"\n";            
+            }
+                        
             mensagem = mensagem + "----\n";
             
             while (rsFor.next()) {
