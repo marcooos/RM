@@ -20,6 +20,8 @@ public class GerarArquivoCliente {
         String mensagem = "";
         GravarArquivo gravar = new GravarArquivo();
         GerarLinhaClienteC gerarLinhaClienteC = new GerarLinhaClienteC();
+        GerarLinhaClienteM gerarLinhaClienteM = new GerarLinhaClienteM();
+        GerarLinhaClienteD gerarLinhaClienteD = new GerarLinhaClienteD();
         
         try {
             GerarClienteDao clienteDao = new GerarClienteDao();
@@ -29,7 +31,9 @@ public class GerarArquivoCliente {
             //Montar Arquivo Clinte
             //LinhaC
             while(rsCli.next()) {
-                mensagem = mensagem + gerarLinhaClienteC.gerarLinhaClienteC(rsCli)+"\n";            
+                mensagem = mensagem + gerarLinhaClienteC.gerarLinhaClienteC(rsCli)+"\n";
+                mensagem = mensagem + gerarLinhaClienteM.gerarLinhaClienteM()+"\n";
+                mensagem = mensagem + gerarLinhaClienteD.gerarLinhaClienteD(rsCli)+"\n";
             }
                         
             mensagem = mensagem + "----\n";
