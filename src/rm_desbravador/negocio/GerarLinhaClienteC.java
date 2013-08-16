@@ -208,9 +208,94 @@ public class GerarLinhaClienteC {
             mensagem = mensagem + tCN.gerarTipoCampoNZerado(5);
             //Número de dependentes
             mensagem = mensagem + tCN.gerarTipoCampoNZerado(10);
-            
-            
-            
+            //Empresa que a pessoa trabalha
+            mensagem = mensagem + tCNU.gerarTipoCampoNU(60);
+            //Estado civil
+            mensagem = mensagem + tCF.gerarTipoCampoF("S");
+            //Produtor rural
+            mensagem = mensagem + tCNU.gerarTipoCampoNU(1);
+            //Inscrição no suframa
+            mensagem = mensagem + tCA.gerarTipoCampoA(rs.getString("suframa"), 14);
+            //Contribuinte do icms
+            mensagem = mensagem + tCF.gerarTipoCampoF("0");
+            //Orgão público
+            mensagem = mensagem + tCN.gerarTipoCampoNZerado(5);
+            //Telefone comercial
+            mensagem = mensagem + tCNU.gerarTipoCampoNU(15);
+            //Caixa postal
+            mensagem = mensagem + tCNU.gerarTipoCampoNU(10);
+            //Caixa postal pagamento
+            mensagem = mensagem + tCNU.gerarTipoCampoNU(10);
+            //Caixa postal Entrega
+            mensagem = mensagem + tCNU.gerarTipoCampoNU(10);
+            //Categoria de autonomo
+            mensagem = mensagem + tCN.gerarTipoCampoNZerado(5);
+            //Código brasileiro de OA
+            mensagem = mensagem + tCNU.gerarTipoCampoNU(10);
+            //Categoria do autônomo
+            mensagem = mensagem + tCNU.gerarTipoCampoNU(11);
+            //Não utilizado
+            mensagem = mensagem + tCNU.gerarTipoCampoNU(10);
+            //valor de outras deduções ir
+            mensagem = mensagem + tCVF.gerarTipoCampoVFZerado(10);
+            //Código da receita
+            mensagem = mensagem + tCNU.gerarTipoCampoNU(10);
+            //Não utilizado
+            mensagem = mensagem + tCNU.gerarTipoCampoNU(1);
+            //CEI
+            mensagem = mensagem + tCA.gerarTipoCampoA(rs.getString("cei"), 20);
+            //Simples Nacional
+            mensagem = mensagem + tCN.gerarTipoCampoNZerado(5);
+            //Tipo da rua
+            mensagem = mensagem + tCN.gerarTipoCampoNZerado(5);
+            //Tipo de bairro
+            mensagem = mensagem + tCN.gerarTipoCampoNZerado(5);
+            //Regime ISS
+            mensagem = mensagem + tCF.gerarTipoCampoF("N");
+            //Retenção de ISS
+            mensagem = mensagem + tCN.gerarTipoCampoNZerado(5);
+            //Data Nascimento
+            mensagem = mensagem + tCData.gerarTipoCampoData(rs.getDate("dtfunda"));
+            //Desativar dados
+            mensagem = mensagem + tCF.gerarTipoCampoF("0");
+            //IE ST MG
+            mensagem = mensagem + tCNU.gerarTipoCampoNU(20);
+            //Bairro
+            mensagem = mensagem + tCA.gerarTipoCampoA(rs.getString("bairro"), 30);
+            //Bairro Entrega
+            mensagem = mensagem + tCA.gerarTipoCampoA(rs.getString("bairro"), 30);
+            //Bairro Pagamento
+            mensagem = mensagem + tCA.gerarTipoCampoA(rs.getString("bairro"), 30);
+            //Ramo de atividade
+            mensagem = mensagem + tCN.gerarTipoCampoNZerado(2);
+            //Rua
+            mensagem = mensagem + tCA.gerarTipoCampoA(rs.getString("endereco"), 100);
+            //Rua pagamento
+            mensagem = mensagem + tCA.gerarTipoCampoA(rs.getString("cobendereco"), 100);
+            //Rua entrega
+            mensagem = mensagem + tCA.gerarTipoCampoA(rs.getString("enderecocorresp"), 100);
+            //Cod pgto GPS
+            mensagem = mensagem + tCNU.gerarTipoCampoNU(5);
+            //Nascionalidade
+            mensagem = mensagem + tCNU.gerarTipoCampoNU(1);
+            //Código Município pagamento
+            mensagem = mensagem + tCN.gerarTipoCampoN(rs.getInt("codibge"), 20);
+            //Código Município entrega
+            mensagem = mensagem + tCN.gerarTipoCampoN(rs.getInt("codibge"), 20);
+            //IDPais
+            mensagem = mensagem + tCN.gerarTipoCampoN(rs.getInt("codpais"), 3);
+            //IDPais pgto
+            mensagem = mensagem + tCN.gerarTipoCampoN(rs.getInt("codpais"), 3);
+            //IDPais Entrega
+            mensagem = mensagem + tCN.gerarTipoCampoN(rs.getInt("codpais"), 3);
+            //Tipo rua pgto
+            mensagem = mensagem + tCN.gerarTipoCampoNZerado(5);
+            //Tipo bairro pgto
+            mensagem = mensagem + tCN.gerarTipoCampoNZerado(5);
+            //Tipo rua Entrega
+            mensagem = mensagem + tCN.gerarTipoCampoNZerado(5);
+            //Tipo bairro pgto
+            mensagem = mensagem + tCN.gerarTipoCampoNZerado(5);
             
         } catch (SQLException ex) {
             System.out.println(ex);
