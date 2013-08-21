@@ -5,7 +5,6 @@
 package rm_desbravador.negocio;
 
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import rm_desbravador.validadores.TipoCampoA;
 import rm_desbravador.validadores.TipoCampoData;
 import rm_desbravador.validadores.TipoCampoF;
@@ -21,13 +20,10 @@ import rm_desbravador.validadores.TipoPessoa;
 public class GerarLinhaClienteD {
 
     public String gerarLinhaClienteD(ResultSet rs) {
-        TipoCampoF tCF = new TipoCampoF();
-        TipoCampoA tCA = new TipoCampoA();
-        TipoCampoData tCData = new TipoCampoData();
+        TipoCampoF tCF = new TipoCampoF();        
         TipoCampoN tCN = new TipoCampoN();
         TipoCampoNU tCNU = new TipoCampoNU();
-        TipoCampoVF tCVF = new TipoCampoVF();
-        TipoPessoa tP = new TipoPessoa();
+        TipoCampoVF tCVF = new TipoCampoVF();        
         String mensagem = "";        
         
             //Fixo

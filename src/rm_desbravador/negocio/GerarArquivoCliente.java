@@ -22,6 +22,8 @@ public class GerarArquivoCliente {
         GerarLinhaClienteC gerarLinhaClienteC = new GerarLinhaClienteC();
         GerarLinhaClienteM gerarLinhaClienteM = new GerarLinhaClienteM();
         GerarLinhaClienteD gerarLinhaClienteD = new GerarLinhaClienteD();
+        GerarLinhaClienteT gerarLinhaClienteT = new GerarLinhaClienteT();
+        GerarLinhaClienteR gerarLinhaClienteR = new GerarLinhaClienteR();
         
         try {
             GerarClienteDao clienteDao = new GerarClienteDao();
@@ -34,6 +36,8 @@ public class GerarArquivoCliente {
                 mensagem = mensagem + gerarLinhaClienteC.gerarLinhaClienteC(rsCli)+"\n";
                 mensagem = mensagem + gerarLinhaClienteM.gerarLinhaClienteM()+"\n";
                 mensagem = mensagem + gerarLinhaClienteD.gerarLinhaClienteD(rsCli)+"\n";
+                mensagem = mensagem + gerarLinhaClienteT.gerarLinhaClienteT(rsCli)+"\n";
+                mensagem = mensagem + gerarLinhaClienteR.gerarLinhaClienteR(rsCli)+"\n";
             }
                         
             mensagem = mensagem + "----\n";
