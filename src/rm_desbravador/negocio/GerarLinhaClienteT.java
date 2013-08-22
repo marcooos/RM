@@ -4,7 +4,6 @@
  */
 package rm_desbravador.negocio;
 
-import java.sql.ResultSet;
 import rm_desbravador.validadores.TipoCampoF;
 import rm_desbravador.validadores.TipoCampoN;
 import rm_desbravador.validadores.TipoCampoNU;
@@ -46,7 +45,7 @@ public class GerarLinhaClienteT {
         //Código da coligada da conta contábil
         mensagem = mensagem + tCN.gerarTipoCampoNZerado(5);
         //Código da conta contábil
-        mensagem = mensagem + tCNU.gerarTipoCampoNU(40);
+        mensagem = mensagem + tCN.gerarTipoCampoNZerado(40);
         //Classificação contábil da conta
         mensagem = mensagem + tCNU.gerarTipoCampoNU(10);
         //Não utilizado

@@ -4,26 +4,32 @@
  */
 package rm_desbravador.negocio;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import rm_desbravador.validadores.TipoCampoA;
 import rm_desbravador.validadores.TipoCampoF;
-import rm_desbravador.validadores.TipoCampoNU;
 
 /**
  *
  * @author marcos
  */
 public class GerarLinhaClienteI {
-     
-    public String gerarLinhaClienteI() {
+
+    public String gerarLinhaClienteI(ResultSet rs) {
         TipoCampoF tCF = new TipoCampoF();
-        TipoCampoNU tCNU = new TipoCampoNU();
+        TipoCampoA tCA = new TipoCampoA();
         String mensagem = "";
 
         //Fixo
         mensagem = mensagem + tCF.gerarTipoCampoF("I");
-        //Estado da inscrição estadual
-        mensagem = mensagem + tCNU.gerarTipoCampoNU(2);
-        //Inscrição estadual
-        mensagem = mensagem + tCNU.gerarTipoCampoNU(20);        
+        try {
+            //Estado da inscrição estadual
+            mensagem = mensagem + tCA.gerarTipoCampoA(rs.getString("estado"), 2);
+            //Inscrição estadual
+            mensagem = mensagem + tCA.gerarTipoCampoAISENTO(rs.getString("inscest"), 20);
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
         return mensagem;
     }
 }

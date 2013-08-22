@@ -4,11 +4,10 @@
  */
 package rm_desbravador.negocio;
 
-import rm_desbravador.validadores.TipoCampoData;
+import rm_desbravador.validadores.TipoCampoA;
 import rm_desbravador.validadores.TipoCampoF;
 import rm_desbravador.validadores.TipoCampoN;
 import rm_desbravador.validadores.TipoCampoNU;
-import rm_desbravador.validadores.TipoCampoVF;
 
 /**
  *
@@ -18,18 +17,18 @@ public class GerarLinhaClienteE {
 
     public String gerarLinhaClienteE() {
         TipoCampoF tCF = new TipoCampoF();
+        TipoCampoA tCA = new TipoCampoA();
         TipoCampoN tCN = new TipoCampoN();
         TipoCampoNU tCNU = new TipoCampoNU();
-        TipoCampoVF tCVF = new TipoCampoVF();
-        TipoCampoData tCData = new TipoCampoData();
+
         String mensagem = "";
 
         //Fixo
         mensagem = mensagem + tCF.gerarTipoCampoF("E");
         //CEI
-        mensagem = mensagem + tCNU.gerarTipoCampoNU(20);
+        mensagem = mensagem + tCN.gerarTipoCampoNZerado(20);
         //Descrição do CEI
-        mensagem = mensagem + tCNU.gerarTipoCampoNU(40);
+        mensagem = mensagem + tCA.gerarTipoCampoA("CEI",40);
         //Telefone
         mensagem = mensagem + tCNU.gerarTipoCampoNU(15);
         //Rua
@@ -48,7 +47,7 @@ public class GerarLinhaClienteE {
         mensagem = mensagem + tCNU.gerarTipoCampoNU(2);
         //Código do país
         mensagem = mensagem + tCN.gerarTipoCampoNZerado(5);
-        
+
         return mensagem;
     }
 }

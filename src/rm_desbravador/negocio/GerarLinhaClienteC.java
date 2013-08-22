@@ -6,6 +6,7 @@ package rm_desbravador.negocio;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import org.postgresql.util.PSQLException;
 import rm_desbravador.validadores.TipoCampoA;
 import rm_desbravador.validadores.TipoCampoData;
 import rm_desbravador.validadores.TipoCampoF;
@@ -21,6 +22,7 @@ import rm_desbravador.validadores.TipoPessoa;
 public class GerarLinhaClienteC {
 
     public String gerarLinhaClienteC(ResultSet rs) {
+        boolean clifor;
         TipoCampoF tCF = new TipoCampoF();
         TipoCampoA tCA = new TipoCampoA();
         TipoCampoData tCData = new TipoCampoData();
@@ -44,8 +46,19 @@ public class GerarLinhaClienteC {
             mensagem = mensagem + tCA.gerarTipoCampoA(rs.getString("cgc"), 20);
             //Inscrição Estadual
             mensagem = mensagem + tCA.gerarTipoCampoA(rs.getString("inscest"), 20);
-            //Cliente (1)
-            mensagem = mensagem + tCN.gerarTipoCampoN(1, 5);
+            //Cliente (1) / Fornecedor (2)
+            try {
+                clifor = rs.getBoolean("situacao");
+            } catch (PSQLException ex) {
+                clifor = true;
+                System.out.println(ex);
+            }
+            if (clifor) {
+                mensagem = mensagem + tCF.gerarTipoCampoF("    1");
+            } else {
+                mensagem = mensagem + tCF.gerarTipoCampoF("    2");
+            }
+            
             //Não utilizado
             mensagem = mensagem + tCNU.gerarTipoCampoNU(40);
             //Numero
@@ -105,13 +118,13 @@ public class GerarLinhaClienteC {
             //Tipo de cliente/Fornecedor
             mensagem = mensagem + tCNU.gerarTipoCampoNU(25);
             //Ativo (0 - Não / 1 - Sim)
-            mensagem = mensagem + tCA.gerarTipoCampoA("1",5);
+            mensagem = mensagem + tCN.gerarTipoCampoN(1,5);
             //Limite de crédito
-            mensagem = mensagem + tCVF.gerarTipoCampoVFZerado(10);
+            mensagem = mensagem + tCNU.gerarTipoCampoNU(10);
             //Não utilizado
             mensagem = mensagem + tCNU.gerarTipoCampoNU(10);
             //Valor último lançamento
-            mensagem = mensagem + tCVF.gerarTipoCampoVFZerado(10);
+            mensagem = mensagem + tCNU.gerarTipoCampoNU(10);
             //Não utilizado
             mensagem = mensagem + tCNU.gerarTipoCampoNU(5);
             //Não utilizado
@@ -133,17 +146,17 @@ public class GerarLinhaClienteC {
             //Campo Alfa 3
             mensagem = mensagem + tCNU.gerarTipoCampoNU(40);
             //Valor Opcional 1
-            mensagem = mensagem + tCVF.gerarTipoCampoVFZerado(10);
+            mensagem = mensagem + tCNU.gerarTipoCampoNU(10);
             //Valor Opcional 2
-            mensagem = mensagem + tCVF.gerarTipoCampoVFZerado(10);
+            mensagem = mensagem + tCNU.gerarTipoCampoNU(10);
             //Valor Opcional 3
-            mensagem = mensagem + tCVF.gerarTipoCampoVFZerado(10);
+            mensagem = mensagem + tCNU.gerarTipoCampoNU(10);
             //Data Opcional 1
-            mensagem = mensagem + tCData.gerarTipoCampoDataZerado();
+            mensagem = mensagem + tCNU.gerarTipoCampoNU(10);
             //Data Opcional 2
-            mensagem = mensagem + tCData.gerarTipoCampoDataZerado();
+            mensagem = mensagem + tCNU.gerarTipoCampoNU(10);
             //Data Opcional 3
-            mensagem = mensagem + tCData.gerarTipoCampoDataZerado();
+            mensagem = mensagem + tCNU.gerarTipoCampoNU(10);
             //Não utilizado
             mensagem = mensagem + tCNU.gerarTipoCampoNU(15);
             //Não utilizado
@@ -151,9 +164,9 @@ public class GerarLinhaClienteC {
             //Data fundação
             mensagem = mensagem + tCData.gerarTipoCampoData(rs.getDate("dtfunda"));
             //Patrimônio
-            mensagem = mensagem + tCVF.gerarTipoCampoVFZerado(10);
+            mensagem = mensagem + tCNU.gerarTipoCampoNU(10);
             //Número de funcionários
-            mensagem = mensagem + tCN.gerarTipoCampoNZerado(10);
+            mensagem = mensagem + tCNU.gerarTipoCampoNU(10);
             //Não utilizado
             mensagem = mensagem + tCNU.gerarTipoCampoNU(94);
             //Coligado do tipo cli/for
@@ -247,17 +260,17 @@ public class GerarLinhaClienteC {
             //Simples Nacional
             mensagem = mensagem + tCN.gerarTipoCampoNZerado(5);
             //Tipo da rua
-            mensagem = mensagem + tCN.gerarTipoCampoNZerado(5);
+            mensagem = mensagem + tCNU.gerarTipoCampoNU(5);
             //Tipo de bairro
-            mensagem = mensagem + tCN.gerarTipoCampoNZerado(5);
+            mensagem = mensagem + tCNU.gerarTipoCampoNU(5);
             //Regime ISS
-            mensagem = mensagem + tCF.gerarTipoCampoF("N");
+            mensagem = mensagem + tCF.gerarTipoCampoF(" ");
             //Retenção de ISS
-            mensagem = mensagem + tCN.gerarTipoCampoNZerado(5);
+            mensagem = mensagem + tCNU.gerarTipoCampoNU(5);
             //Data Nascimento
             mensagem = mensagem + tCData.gerarTipoCampoData(rs.getDate("dtfunda"));
             //Desativar dados
-            mensagem = mensagem + tCF.gerarTipoCampoF("0");
+            mensagem = mensagem + tCF.gerarTipoCampoF(" ");
             //IE ST MG
             mensagem = mensagem + tCNU.gerarTipoCampoNU(20);
             //Bairro
@@ -277,7 +290,8 @@ public class GerarLinhaClienteC {
             //Cod pgto GPS
             mensagem = mensagem + tCNU.gerarTipoCampoNU(5);
             //Nascionalidade
-            mensagem = mensagem + tCNU.gerarTipoCampoNU(1);
+            mensagem = mensagem + tCN.gerarTipoCampoNZerado(1);
+            /*
             //Código Município pagamento
             mensagem = mensagem + tCN.gerarTipoCampoN(rs.getInt("codibge"), 20);
             //Código Município entrega
@@ -295,7 +309,7 @@ public class GerarLinhaClienteC {
             //Tipo rua Entrega
             mensagem = mensagem + tCN.gerarTipoCampoNZerado(5);
             //Tipo bairro pgto
-            mensagem = mensagem + tCN.gerarTipoCampoNZerado(5);
+            mensagem = mensagem + tCN.gerarTipoCampoNZerado(5);*/
             
         } catch (SQLException ex) {
             System.out.println(ex);

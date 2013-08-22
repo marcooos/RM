@@ -5,7 +5,7 @@
 package rm_desbravador.negocio;
 
 import rm_desbravador.validadores.TipoCampoF;
-import rm_desbravador.validadores.TipoCampoNU;
+import rm_desbravador.validadores.TipoCampoN;
 
 /**
  *
@@ -15,13 +15,13 @@ public class GerarLinhaClienteB {
 
     public String gerarLinhaClienteB() {
         TipoCampoF tCF = new TipoCampoF();
-        TipoCampoNU tCNU = new TipoCampoNU();
+        TipoCampoN tCN = new TipoCampoN();
         String mensagem = "";
 
         //Fixo
         mensagem = mensagem + tCF.gerarTipoCampoF("B");
         //Código fo tributo
-        mensagem = mensagem + tCNU.gerarTipoCampoNU(10);
+        mensagem = mensagem + tCN.gerarTipoCampoNZerado(10);
         
         return mensagem;
     }

@@ -15,6 +15,33 @@ public class TipoCampoA {
         int contador;
         try {
             contador = campo.length();
+            if (contador > tamanho) {
+                retorno = String.valueOf(campo).substring(0, tamanho);
+                return retorno;
+            } else  {
+                if (contador < tamanho) {
+                while (contador < tamanho) {
+                    retorno = retorno + " ";
+                    contador++;
+                }
+                retorno = campo + retorno;
+            } else {
+                retorno = campo.substring(0, tamanho);
+            }
+            return retorno;
+            }            
+        } catch (NullPointerException ex) {
+            System.out.println(ex);
+            return gerarTipoCampoAZerado(tamanho);
+        }
+
+    }
+    
+    public String gerarTipoCampoAISENTO(String campo, int tamanho) {
+        String retorno = "";
+        int contador;
+        try {
+            contador = campo.length();
             if (contador < tamanho) {
                 while (contador < tamanho) {
                     retorno = retorno + " ";
@@ -27,7 +54,7 @@ public class TipoCampoA {
             return retorno;
         } catch (NullPointerException ex) {
             System.out.println(ex);
-            return gerarTipoCampoAZerado(tamanho);
+            return gerarTipoCampoA("ISENTO",tamanho);
         }
 
     }

@@ -38,7 +38,7 @@ public class GerarLinhaClienteR {
         //Código da coligada da conta gerencial
         mensagem = mensagem + tCN.gerarTipoCampoNZerado(5);
         //Código da conta gerencial
-        mensagem = mensagem + tCNU.gerarTipoCampoNU(40);
+        mensagem = mensagem + tCN.gerarTipoCampoNZerado(40);
         //Percentual
         mensagem = mensagem + tCVF.gerarTipoCampoVFZerado(10);
         //Não utilizado

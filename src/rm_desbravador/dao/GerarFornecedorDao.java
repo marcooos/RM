@@ -24,8 +24,9 @@ public class GerarFornecedorDao {
                 + "' ' as complementonr,email,' ' as complemento,estado,cep,telefone1 as telefone, cidade as cobcidade,"
                 + "estado as cobestado,cep as cobcep,telefone1 as cobfone, numero as nroendcorresp,cidade as cidadecorresp,"
                 + "estado as estadocorresp,cep as cepcorresp,fax,datareg as dtfunda,inscmunic as inscmunicipal,'F' as tipoemp,pais,"
-                + "codibge, suframa,' ' as cei,bairro, endereco, endereco as cobendereco, endereco as enderecocorresp,codpais"
-                + " from cadfornec limit 1";
+                + "codibge, suframa,' ' as cei,bairro, endereco, endereco as cobendereco, endereco as enderecocorresp,codpais,situacao"
+                + " from cadfornec "
+                + " where cgc <> '' limit 1";
         con = abrirCon.getConexao(
                 PropertiesLoaderImpl.getValor("servidor"),
                 PropertiesLoaderImpl.getValor("porta"),

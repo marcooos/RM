@@ -4,7 +4,8 @@
  */
 package rm_desbravador.negocio;
 
-import java.sql.ResultSet;
+
+import rm_desbravador.validadores.TipoCampoA;
 import rm_desbravador.validadores.TipoCampoData;
 import rm_desbravador.validadores.TipoCampoF;
 import rm_desbravador.validadores.TipoCampoN;
@@ -18,6 +19,7 @@ public class GerarLinhaClienteO {
 
     public String gerarLinhaClienteO() {
         TipoCampoF tCF = new TipoCampoF();
+        TipoCampoA tCA = new TipoCampoA();
         TipoCampoN tCN = new TipoCampoN();
         TipoCampoNU tCNU = new TipoCampoNU();        
         TipoCampoData tCData = new TipoCampoData();
@@ -26,7 +28,7 @@ public class GerarLinhaClienteO {
         //Fixo
         mensagem = mensagem + tCF.gerarTipoCampoF("O");
         //Nome do contato
-        mensagem = mensagem + tCNU.gerarTipoCampoNU(50);
+        mensagem = mensagem + tCA.gerarTipoCampoA("Contato",50);
         //E-mail do contato
         mensagem = mensagem + tCNU.gerarTipoCampoNU(80);
         //Telefone de contato

@@ -15,12 +15,17 @@ public class TipoCampoN {
 
         try {
             int contador = String.valueOf(campo).length();
-            while (contador < tamanho) {
+            if (contador > tamanho) {
+                retorno = String.valueOf(campo).substring(0, tamanho);
+                return retorno;
+            } else  {
+                while (contador < tamanho) {
                 retorno = retorno + "0";
                 contador++;
             }
             retorno = retorno + campo;
             return retorno;
+            }            
         } catch (NullPointerException ex) {
             System.out.println(ex);
             return gerarTipoCampoNZerado(tamanho);

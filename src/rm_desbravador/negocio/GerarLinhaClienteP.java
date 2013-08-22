@@ -4,11 +4,10 @@
  */
 package rm_desbravador.negocio;
 
-import rm_desbravador.validadores.TipoCampoData;
+import rm_desbravador.validadores.TipoCampoA;
 import rm_desbravador.validadores.TipoCampoF;
 import rm_desbravador.validadores.TipoCampoN;
 import rm_desbravador.validadores.TipoCampoNU;
-import rm_desbravador.validadores.TipoCampoVF;
 
 /**
  *
@@ -18,16 +17,15 @@ public class GerarLinhaClienteP {
 
     public String gerarLinhaClienteP() {
         TipoCampoF tCF = new TipoCampoF();
+        TipoCampoA tCA = new TipoCampoA();
         TipoCampoN tCN = new TipoCampoN();
-        TipoCampoNU tCNU = new TipoCampoNU();
-        TipoCampoVF tCVF = new TipoCampoVF();
-        TipoCampoData tCData = new TipoCampoData();
+        TipoCampoNU tCNU = new TipoCampoNU();        
         String mensagem = "";
 
         //Fixo
         mensagem = mensagem + tCF.gerarTipoCampoF("P");
-        //Dados bancários
-        mensagem = mensagem + tCNU.gerarTipoCampoNU(40);
+        //Descrição dos bancários
+        mensagem = mensagem + tCA.gerarTipoCampoA("DADOS BANCARIOS",40);
         //Forma de pagamento /débito
         mensagem = mensagem + tCF.gerarTipoCampoF("I");
         //Número do banco
