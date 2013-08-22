@@ -20,6 +20,7 @@ public class GerarArquivoCliente {
         String mensagem = "";
         GravarArquivo gravar = new GravarArquivo();
         GerarLinhaClienteC gerarLinhaClienteC = new GerarLinhaClienteC();
+        GerarLinhaFornecedorC gerarLinhaFornecedorC = new GerarLinhaFornecedorC();
         GerarLinhaClienteM gerarLinhaClienteM = new GerarLinhaClienteM();
         GerarLinhaClienteD gerarLinhaClienteD = new GerarLinhaClienteD();
         GerarLinhaClienteT gerarLinhaClienteT = new GerarLinhaClienteT();
@@ -49,18 +50,26 @@ public class GerarArquivoCliente {
                 mensagem = mensagem + gerarLinhaClienteP.gerarLinhaClienteP()+"\n";
                 mensagem = mensagem + gerarLinhaClienteE.gerarLinhaClienteE()+"\n";
                 mensagem = mensagem + gerarLinhaClienteB.gerarLinhaClienteB()+"\n";
+                mensagem = mensagem + gerarLinhaClienteI.gerarLinhaClienteI()+"\n";                                
+            }                                                
+            while (rsFor.next()) {
+                mensagem = mensagem + gerarLinhaFornecedorC.gerarLinhaFornecedorC(rsFor)+"\n";
+                mensagem = mensagem + gerarLinhaClienteM.gerarLinhaClienteM()+"\n";
+                mensagem = mensagem + gerarLinhaClienteD.gerarLinhaClienteD()+"\n";
+                mensagem = mensagem + gerarLinhaClienteT.gerarLinhaClienteT()+"\n";
+                mensagem = mensagem + gerarLinhaClienteR.gerarLinhaClienteR()+"\n";
+                mensagem = mensagem + gerarLinhaClienteO.gerarLinhaClienteO()+"\n";
+                mensagem = mensagem + gerarLinhaClienteMC.gerarLinhaClienteMC()+"\n";
+                mensagem = mensagem + gerarLinhaClienteP.gerarLinhaClienteP()+"\n";
+                mensagem = mensagem + gerarLinhaClienteE.gerarLinhaClienteE()+"\n";
+                mensagem = mensagem + gerarLinhaClienteB.gerarLinhaClienteB()+"\n";
                 mensagem = mensagem + gerarLinhaClienteI.gerarLinhaClienteI()+"\n";
-                /*if (rsCli.isLast()) {
+                /*if (rsFor.isLast()) {
                     mensagem = mensagem + gerarLinhaClienteI.gerarLinhaClienteI();
                 } else {
                     mensagem = mensagem + gerarLinhaClienteI.gerarLinhaClienteI()+"\n";
                 }*/
-                
-            }                                                
-            /*while (rsFor.next()) {
-                String nome = rsFor.getString("nomefornec");
-                mensagem = mensagem + nome;
-            }*/
+            }
             gravar.gravarArquivoTexto(mensagem, "teste", "/Users/marcos/Backup");
             return true;
         } catch (SQLException ex) {
