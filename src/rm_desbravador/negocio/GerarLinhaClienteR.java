@@ -16,7 +16,7 @@ import rm_desbravador.validadores.TipoCampoVF;
  */
 public class GerarLinhaClienteR {
 
-    public String gerarLinhaClienteR(ResultSet rs) {
+    public String gerarLinhaClienteR() {
         TipoCampoF tCF = new TipoCampoF();
         TipoCampoN tCN = new TipoCampoN();
         TipoCampoNU tCNU = new TipoCampoNU();

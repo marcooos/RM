@@ -4,14 +4,11 @@
  */
 package rm_desbravador.negocio;
 
-import java.sql.ResultSet;
-import rm_desbravador.validadores.TipoCampoA;
-import rm_desbravador.validadores.TipoCampoData;
 import rm_desbravador.validadores.TipoCampoF;
 import rm_desbravador.validadores.TipoCampoN;
 import rm_desbravador.validadores.TipoCampoNU;
 import rm_desbravador.validadores.TipoCampoVF;
-import rm_desbravador.validadores.TipoPessoa;
+
 
 /**
  *
@@ -19,7 +16,7 @@ import rm_desbravador.validadores.TipoPessoa;
  */
 public class GerarLinhaClienteD {
 
-    public String gerarLinhaClienteD(ResultSet rs) {
+    public String gerarLinhaClienteD() {
         TipoCampoF tCF = new TipoCampoF();        
         TipoCampoN tCN = new TipoCampoN();
         TipoCampoNU tCNU = new TipoCampoNU();
