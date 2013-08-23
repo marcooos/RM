@@ -84,27 +84,27 @@ public class GerarLinhaClienteC {
             //Não utilizado
             mensagem = mensagem + tCNU.gerarTipoCampoNU(20);
             //Cidade do pagamento
-            mensagem = mensagem + tCA.gerarTipoCampoA(rs.getString("cobcidade"),32);            
+            mensagem = mensagem + tCA.gerarTipoCampoA(rs.getString("cidade"),32);            
             //Estado do pagamento
-            mensagem = mensagem + tCA.gerarTipoCampoA(rs.getString("cobestado"),2);
+            mensagem = mensagem + tCA.gerarTipoCampoA(rs.getString("estado"),2);
             //CEP do pagamento
-            mensagem = mensagem + tCA.gerarTipoCampoA(rs.getString("cobcep"),9);
+            mensagem = mensagem + tCA.gerarTipoCampoA(rs.getString("cep"),9);
             //Telefone do pagamento
-            mensagem = mensagem + tCA.gerarTipoCampoA(rs.getString("cobfone"),15);
+            mensagem = mensagem + tCA.gerarTipoCampoA(rs.getString("telefone"),15);
             //Não utilizado
             mensagem = mensagem + tCNU.gerarTipoCampoNU(40);
             //Número entrega
-            mensagem = mensagem + tCA.gerarTipoCampoA(rs.getString("nroendcorresp"),8);
+            mensagem = mensagem + tCA.gerarTipoCampoA(rs.getString("complementonr"),8);
             //Complemento entrega
             mensagem = mensagem + tCNU.gerarTipoCampoNU(20);
             //Não utilizado
             mensagem = mensagem + tCNU.gerarTipoCampoNU(20);
             //Cidade entrega
-            mensagem = mensagem + tCA.gerarTipoCampoA(rs.getString("cidadecorresp"),32);            
+            mensagem = mensagem + tCA.gerarTipoCampoA(rs.getString("cidade"),32);            
             //Estado entrega
-            mensagem = mensagem + tCA.gerarTipoCampoA(rs.getString("estadocorresp"),2);
+            mensagem = mensagem + tCA.gerarTipoCampoA(rs.getString("estado"),2);
             //CEP entrega
-            mensagem = mensagem + tCA.gerarTipoCampoA(rs.getString("cepcorresp"),9);
+            mensagem = mensagem + tCA.gerarTipoCampoA(rs.getString("cep"),9);
             //Telefone entrega
             mensagem = mensagem + tCA.gerarTipoCampoA(rs.getString("telefone"),15);
             //Fax
@@ -284,9 +284,9 @@ public class GerarLinhaClienteC {
             //Rua
             mensagem = mensagem + tCA.gerarTipoCampoA(rs.getString("endereco"), 100);
             //Rua pagamento
-            mensagem = mensagem + tCA.gerarTipoCampoA(rs.getString("cobendereco"), 100);
+            mensagem = mensagem + tCA.gerarTipoCampoA(rs.getString("endereco"), 100);
             //Rua entrega
-            mensagem = mensagem + tCA.gerarTipoCampoA(rs.getString("enderecocorresp"), 100);
+            mensagem = mensagem + tCA.gerarTipoCampoA(rs.getString("endereco"), 100);
             //Cod pgto GPS
             mensagem = mensagem + tCNU.gerarTipoCampoNU(5);
             //Nascionalidade
