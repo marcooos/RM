@@ -4,8 +4,10 @@
  */
 package rm_desbravador.visao;
 
+import java.util.Date;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import rm_desbravador.controler.UIPrincipalControler;
 import rm_desbravador.utilitarios.Conexao;
 import rm_desbravador.utilitarios.PropertiesLoaderImpl;
 
@@ -28,8 +30,11 @@ public class UIPrincipal extends javax.swing.JFrame {
         jTFBanco.setText(PropertiesLoaderImpl.getValor("banco"));
         jTFUsuario.setText(PropertiesLoaderImpl.getValor("usuario"));
         jPFSenha.setText(PropertiesLoaderImpl.getValor("senha"));
+        jTFDiretorioCliente.setText(PropertiesLoaderImpl.getValor("dirCliente"));
+        jFTdataCliente.setText(PropertiesLoaderImpl.getValor("dataCliente"));
+        jTFDiretorioTitulos.setText(PropertiesLoaderImpl.getValor("dirTitulos"));
+        jFTdataTitulos.setText(PropertiesLoaderImpl.getValor("dataTitulos"));
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -43,24 +48,24 @@ public class UIPrincipal extends javax.swing.JFrame {
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jFormattedTextField1 = new javax.swing.JFormattedTextField();
+        jFTdataCliente = new javax.swing.JFormattedTextField();
         jTFDiretorioCliente = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jBBuscarDirCliente = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
-        jButton6 = new javax.swing.JButton();
+        jTAClienteRetorno = new javax.swing.JTextArea();
+        jBExportarCliente = new javax.swing.JButton();
         jBFecharCliente = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
-        jFormattedTextField2 = new javax.swing.JFormattedTextField();
+        jFTdataTitulos = new javax.swing.JFormattedTextField();
         jLabel5 = new javax.swing.JLabel();
         jTFDiretorioTitulos = new javax.swing.JTextField();
         jBBuscarDirTitulo = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTextArea2 = new javax.swing.JTextArea();
+        jTATitulosRetorno = new javax.swing.JTextArea();
         jButton4 = new javax.swing.JButton();
         jBFecharTitulo = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
@@ -91,7 +96,7 @@ public class UIPrincipal extends javax.swing.JFrame {
 
         jLabel1.setText("Data da última exportação: ");
 
-        jFormattedTextField1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter()));
+        jFTdataCliente.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter()));
 
         jLabel2.setText("Diretório da exportação:");
 
@@ -104,14 +109,19 @@ public class UIPrincipal extends javax.swing.JFrame {
 
         jLabel3.setText("Mensangens:");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        jTAClienteRetorno.setColumns(20);
+        jTAClienteRetorno.setRows(5);
+        jScrollPane1.setViewportView(jTAClienteRetorno);
 
-        jButton6.setText("Exportar");
-        jButton6.setMaximumSize(new java.awt.Dimension(85, 29));
-        jButton6.setMinimumSize(new java.awt.Dimension(85, 29));
-        jButton6.setPreferredSize(new java.awt.Dimension(85, 29));
+        jBExportarCliente.setText("Exportar");
+        jBExportarCliente.setMaximumSize(new java.awt.Dimension(85, 29));
+        jBExportarCliente.setMinimumSize(new java.awt.Dimension(85, 29));
+        jBExportarCliente.setPreferredSize(new java.awt.Dimension(85, 29));
+        jBExportarCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBExportarClienteActionPerformed(evt);
+            }
+        });
 
         jBFecharCliente.setText("Fechar");
         jBFecharCliente.setMaximumSize(new java.awt.Dimension(97, 29));
@@ -137,7 +147,7 @@ public class UIPrincipal extends javax.swing.JFrame {
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                         .add(jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                             .add(jPanel2Layout.createSequentialGroup()
-                                .add(jFormattedTextField1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 174, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                .add(jFTdataCliente, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 174, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                                 .add(0, 369, Short.MAX_VALUE))
                             .add(jPanel2Layout.createSequentialGroup()
                                 .add(jTFDiretorioCliente, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 413, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
@@ -146,7 +156,7 @@ public class UIPrincipal extends javax.swing.JFrame {
                     .add(org.jdesktop.layout.GroupLayout.LEADING, jPanel2Layout.createSequentialGroup()
                         .add(jLabel3)
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .add(jButton6, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 134, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .add(jBExportarCliente, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 134, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                         .add(jBFecharCliente, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 119, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
@@ -157,7 +167,7 @@ public class UIPrincipal extends javax.swing.JFrame {
                 .addContainerGap()
                 .add(jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(jLabel1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 28, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(jFormattedTextField1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                    .add(jFTdataCliente, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                 .add(18, 18, 18)
                 .add(jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(jTFDiretorioCliente, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
@@ -166,7 +176,7 @@ public class UIPrincipal extends javax.swing.JFrame {
                 .add(18, 18, 18)
                 .add(jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                     .add(jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                        .add(jButton6, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 47, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .add(jBExportarCliente, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 47, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                         .add(jBFecharCliente, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 48, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                     .add(org.jdesktop.layout.GroupLayout.TRAILING, jLabel3))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
@@ -180,7 +190,7 @@ public class UIPrincipal extends javax.swing.JFrame {
 
         jLabel4.setText("Data da última exportação: ");
 
-        jFormattedTextField2.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter()));
+        jFTdataTitulos.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter()));
 
         jLabel5.setText("Diretório da exportação:");
 
@@ -193,9 +203,9 @@ public class UIPrincipal extends javax.swing.JFrame {
 
         jLabel6.setText("Mensangens:");
 
-        jTextArea2.setColumns(20);
-        jTextArea2.setRows(5);
-        jScrollPane2.setViewportView(jTextArea2);
+        jTATitulosRetorno.setColumns(20);
+        jTATitulosRetorno.setRows(5);
+        jScrollPane2.setViewportView(jTATitulosRetorno);
 
         jButton4.setText("Exportar");
 
@@ -220,7 +230,7 @@ public class UIPrincipal extends javax.swing.JFrame {
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                         .add(jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                             .add(jPanel3Layout.createSequentialGroup()
-                                .add(jFormattedTextField2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 174, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                .add(jFTdataTitulos, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 174, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                                 .add(0, 369, Short.MAX_VALUE))
                             .add(jPanel3Layout.createSequentialGroup()
                                 .add(jTFDiretorioTitulos, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 416, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
@@ -241,7 +251,7 @@ public class UIPrincipal extends javax.swing.JFrame {
                 .addContainerGap()
                 .add(jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(jLabel4, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 28, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(jFormattedTextField2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                    .add(jFTdataTitulos, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                 .add(18, 18, 18)
                 .add(jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(jTFDiretorioTitulos, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
@@ -426,6 +436,7 @@ public class UIPrincipal extends javax.swing.JFrame {
         arquivo.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         arquivo.showOpenDialog(rootPane);
         jTFDiretorioCliente.setText(arquivo.getSelectedFile().getAbsolutePath());
+        PropertiesLoaderImpl.setValor("dirCliente", jTFDiretorioCliente.getText());
     }//GEN-LAST:event_jBBuscarDirClienteActionPerformed
 
     private void jBFecharTituloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBFecharTituloActionPerformed
@@ -438,6 +449,7 @@ public class UIPrincipal extends javax.swing.JFrame {
         arquivo.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         arquivo.showOpenDialog(rootPane);
         jTFDiretorioTitulos.setText(arquivo.getSelectedFile().getAbsolutePath());
+        PropertiesLoaderImpl.setValor("dirTitulos", jTFDiretorioTitulos.getText());
     }//GEN-LAST:event_jBBuscarDirTituloActionPerformed
 
     private void jBTestarConexaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBTestarConexaoActionPerformed
@@ -467,18 +479,33 @@ public class UIPrincipal extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_jBSalvarActionPerformed
+
+    private void jBExportarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBExportarClienteActionPerformed
+        try {
+            UIPrincipalControler uipc = new UIPrincipalControler();
+            Date data = new Date(jFTdataCliente.getText());
+            PropertiesLoaderImpl.setValor("dataCliente",jFTdataCliente.getText());
+            jTAClienteRetorno.setText(uipc.gerarAquivoClientes(data, jTFDiretorioCliente.getText()));
+            JOptionPane.showMessageDialog(null, "Arquivo exportado\n" +
+                    jTFDiretorioCliente.getText()+data.toString()+".txt",
+                    "Informação", JOptionPane.WARNING_MESSAGE);            
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(rootPane, "Problema al exportar arquivo\n"
+                    + ex, "Informação", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jBExportarClienteActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBBuscarDirCliente;
     private javax.swing.JButton jBBuscarDirTitulo;
+    private javax.swing.JButton jBExportarCliente;
     private javax.swing.JButton jBFecharCliente;
     private javax.swing.JButton jBFecharConf;
     private javax.swing.JButton jBFecharTitulo;
     private javax.swing.JButton jBSalvar;
     private javax.swing.JButton jBTestarConexao;
     private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JFormattedTextField jFormattedTextField1;
-    private javax.swing.JFormattedTextField jFormattedTextField2;
+    private javax.swing.JFormattedTextField jFTdataCliente;
+    private javax.swing.JFormattedTextField jFTdataTitulos;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -499,7 +526,9 @@ public class UIPrincipal extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JTextArea jTAClienteRetorno;
     private javax.swing.JTextArea jTARetornoConfig;
+    private javax.swing.JTextArea jTATitulosRetorno;
     private javax.swing.JTextField jTFBanco;
     private javax.swing.JTextField jTFDiretorioCliente;
     private javax.swing.JTextField jTFDiretorioTitulos;
@@ -507,7 +536,5 @@ public class UIPrincipal extends javax.swing.JFrame {
     private javax.swing.JTextField jTFServidor;
     private javax.swing.JTextField jTFUsuario;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextArea jTextArea2;
     // End of variables declaration//GEN-END:variables
 }

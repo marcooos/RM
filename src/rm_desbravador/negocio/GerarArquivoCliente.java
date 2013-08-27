@@ -6,6 +6,7 @@ package rm_desbravador.negocio;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Date;
 import rm_desbravador.dao.GerarClienteDao;
 import rm_desbravador.dao.GerarFornecedorDao;
 import rm_desbravador.utilitarios.GravarArquivo;
@@ -15,9 +16,10 @@ import rm_desbravador.utilitarios.GravarArquivo;
  * @author marcos
  */
 public class GerarArquivoCliente {
+    String mensagem;
 
-    public boolean gerarArquivoCliente() {        
-        String mensagem = "";
+    public boolean gerarArquivoCliente(Date data, String caminho) {        
+        mensagem = "";
         GravarArquivo gravar = new GravarArquivo();
         GerarLinhaClienteC gerarLinhaClienteC = new GerarLinhaClienteC();        
         /*GerarLinhaClienteM gerarLinhaClienteM = new GerarLinhaClienteM();
@@ -81,11 +83,15 @@ public class GerarArquivoCliente {
                     mensagem = mensagem + gerarLinhaClienteI.gerarLinhaClienteI()+"\n";
                 }*/
             }
-            gravar.gravarArquivoTexto(mensagem, "teste", "/Users/marcos/Backup");
+            gravar.gravarArquivoTexto(mensagem, data.toString(), caminho);
             return true;
         } catch (SQLException ex) {
             System.out.println(ex);
             return false;
         }
+    }
+    
+    public String getMensagem(){
+        return mensagem;
     }
 }

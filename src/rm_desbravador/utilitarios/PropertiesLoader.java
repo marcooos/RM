@@ -27,6 +27,10 @@ public class PropertiesLoader {
                                 props.setProperty("banco", "windes4_regente");
                                 props.setProperty("usuario", "dah");
                                 props.setProperty("senha", "era.a");
+                                props.setProperty("dirCliente", "");
+                                props.setProperty("dataCliente", "");
+                                props.setProperty("dirTitulos", "");
+                                props.setProperty("dataTitulos", "");
 				props.store(outPropFile, "Arquivo de propriedades");
 				outPropFile.close();
 				in = new FileInputStream(nomeDoProperties);

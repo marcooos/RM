@@ -4,6 +4,7 @@
  */
 package rm_desbravador.controler;
 
+import java.util.Date;
 import rm_desbravador.negocio.GerarArquivoCliente;
 
 /**
@@ -11,10 +12,11 @@ import rm_desbravador.negocio.GerarArquivoCliente;
  * @author marcos
  */
 public class UIPrincipalControler {
+    String mensagem;
     
-    public String gerarAquivoClientes() {
+    public String gerarAquivoClientes(Date data, String caminho) {
         GerarArquivoCliente gerarArquivoCliente = new GerarArquivoCliente();
-        gerarArquivoCliente.gerarArquivoCliente();
-        return null;
+        gerarArquivoCliente.gerarArquivoCliente(data,caminho);        
+        return gerarArquivoCliente.getMensagem();
     }
 }
