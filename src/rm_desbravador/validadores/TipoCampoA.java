@@ -58,6 +58,29 @@ public class TipoCampoA {
         }
 
     }
+    
+    public String gerarTipoCampoAIBGE(String campo, int tamanho) {
+        String retorno = "";        
+        int contador;
+        try {
+            campo = campo.substring(2, 7);
+            contador = campo.length();
+            if (contador < tamanho) {
+                while (contador < tamanho) {
+                    retorno = retorno + " ";
+                    contador++;
+                }
+                retorno = campo + retorno;
+            } else {
+                retorno = campo.substring(0, tamanho);
+            }
+            return retorno;
+        } catch (NullPointerException ex) {
+            System.out.println(ex);
+            return gerarTipoCampoA("     ",tamanho);
+        }
+
+    }
 
     public String gerarTipoCampoAZerado(int tamanho) {
         String retorno = "";

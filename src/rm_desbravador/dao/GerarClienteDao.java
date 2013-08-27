@@ -27,7 +27,7 @@ public class GerarClienteDao {
                 + "codibge, suframa,cei,bairro, endereco, cobendereco, enderecocorresp,"
                 + "codpais"
                 + " from cadempresa"
-                + " where cgc <> '' limit 5";
+                + " where cgc <> '' limit 10";
         con = abrirCon.getConexao(
                 PropertiesLoaderImpl.getValor("servidor"),
                 PropertiesLoaderImpl.getValor("porta"),

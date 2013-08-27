@@ -204,7 +204,7 @@ public class GerarLinhaClienteC {
             //estado emissor
             mensagem = mensagem + tCNU.gerarTipoCampoNU(2);
             //Código Município
-            mensagem = mensagem + tCA.gerarTipoCampoA(rs.getString("codibge"), 20);
+            mensagem = mensagem + tCA.gerarTipoCampoAIBGE(rs.getString("codibge"), 20);
             //Código fornecedor imobilizado
             mensagem = mensagem + tCN.gerarTipoCampoNZerado(5);
             //Não utilizado
@@ -290,12 +290,12 @@ public class GerarLinhaClienteC {
             //Cod pgto GPS
             mensagem = mensagem + tCNU.gerarTipoCampoNU(5);
             //Nascionalidade
-            mensagem = mensagem + tCN.gerarTipoCampoNZerado(1);
-            /*
+            mensagem = mensagem + tCN.gerarTipoCampoNZerado(1);            
             //Código Município pagamento
-            mensagem = mensagem + tCN.gerarTipoCampoN(rs.getInt("codibge"), 20);
+            mensagem = mensagem + tCA.gerarTipoCampoAIBGE(rs.getString("codibge"), 20);
             //Código Município entrega
-            mensagem = mensagem + tCN.gerarTipoCampoN(rs.getInt("codibge"), 20);
+            mensagem = mensagem + tCA.gerarTipoCampoAIBGE(rs.getString("codibge"), 20);
+            /*
             //IDPais
             mensagem = mensagem + tCN.gerarTipoCampoN(rs.getInt("codpais"), 3);
             //IDPais pgto

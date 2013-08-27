@@ -26,7 +26,7 @@ public class GerarFornecedorDao {
                 + "estado as estadocorresp,cep as cepcorresp,fax,datareg as dtfunda,inscmunic as inscmunicipal,'F' as tipoemp,pais,"
                 + "codibge, suframa,' ' as cei,bairro, endereco, endereco as cobendereco, endereco as enderecocorresp,codpais,situacao"
                 + " from cadfornec "
-                + " where cgc <> '' limit 5";
+                + " where cgc <> '' limit 10";
         con = abrirCon.getConexao(
                 PropertiesLoaderImpl.getValor("servidor"),
                 PropertiesLoaderImpl.getValor("porta"),

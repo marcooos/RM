@@ -4,7 +4,7 @@
  */
 package rm_desbravador;
 
-import rm_desbravador.negocio.GerarArquivoCliente;
+import rm_desbravador.visao.UIPrincipal;
 
 
 /**
@@ -17,7 +17,11 @@ public class RM_Desbravador {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        GerarArquivoCliente gerarArquivoCliente = new GerarArquivoCliente();
-        System.out.println(gerarArquivoCliente.gerarArquivoCliente());                
+        UIPrincipal uip = new UIPrincipal();
+        uip.iniciarInterface();
+        uip.setVisible(true);
+       // GerarArquivoCliente gerarArquivoCliente = new GerarArquivoCliente();
+       // System.out.println(gerarArquivoCliente.gerarArquivoCliente());                
+        
     }
 }
