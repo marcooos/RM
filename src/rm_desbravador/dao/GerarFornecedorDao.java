@@ -17,22 +17,36 @@ import rm_desbravador.utilitarios.PropertiesLoaderImpl;
  */
 public class GerarFornecedorDao {
 
-    public ResultSet listaDeFornecedores() {
+    public ResultSet listaDeFornecedores(boolean tipoBanco) {
+        String sql;
         Connection con;
         Conexao abrirCon = new Conexao();
-        String sql = "select codfornec as codempresa,nomefornec as nomeempresa,razaosocial,cgc,inscest,cidade,"
-                + "' ' as complementonr,email,' ' as complemento,estado,cep,telefone1 as telefone, cidade as cobcidade,"
-                + "estado as cobestado,cep as cobcep,telefone1 as cobfone, numero as nroendcorresp,cidade as cidadecorresp,"
-                + "estado as estadocorresp,cep as cepcorresp,fax,datareg as dtfunda,inscmunic as inscmunicipal,'F' as tipoemp,pais,"
-                + "codibge, suframa,' ' as cei,bairro, endereco, endereco as cobendereco, endereco as enderecocorresp,codpais,situacao"
-                + " from cadfornec "
-                + " where cgc <> '' limit 10";
+        if (tipoBanco) {
+            sql = "select codfornec as codempresa,nomefornec as nomeempresa,razaosocial,cgc,inscest,cidade,"
+                    + "' ' as complementonr,email,' ' as complemento,estado,cep,telefone1 as telefone, cidade as cobcidade,"
+                    + "estado as cobestado,cep as cobcep,telefone1 as cobfone, numero as nroendcorresp,cidade as cidadecorresp,"
+                    + "estado as estadocorresp,cep as cepcorresp,fax,datareg as dtfunda,inscmunic as inscmunicipal,'F' as tipoemp,pais,"
+                    + "codibge, suframa,' ' as cei,bairro, endereco, endereco as cobendereco, endereco as enderecocorresp,codpais,situacao"
+                    + " from cadfornec "
+                    + " where cgc <> ''";
+        } else {
+            sql = "select codfornec as codempresa,nomefornec as nomeempresa,razaosocial,cgc,inscest,cidade,"
+                    + "' ' as complementonr,email,' ' as complemento,estado,cep,telefone1 as telefone, cidade as cobcidade,"
+                    + "estado as cobestado,cep as cobcep,telefone1 as cobfone, numero as nroendcorresp,cidade as cidadecorresp,"
+                    + "estado as estadocorresp,cep as cepcorresp,fax,datareg as dtfunda,inscmunic as inscmunicipal,'F' as tipoemp,pais,"
+                    + "codibge, suframa,' ' as cei,bairro, endereco, endereco as cobendereco, endereco as enderecocorresp,codpais,situacao"
+                    + " from cadfornec "
+                    + " where cgc <> '' limit 10";
+        }
         con = abrirCon.getConexao(
                 PropertiesLoaderImpl.getValor("servidor"),
                 PropertiesLoaderImpl.getValor("porta"),
                 PropertiesLoaderImpl.getValor("banco"),
                 PropertiesLoaderImpl.getValor("usuario"),
-                PropertiesLoaderImpl.getValor("senha"));
+                PropertiesLoaderImpl.getValor("senha"),
+                tipoBanco);
+
+
         try {
             PreparedStatement stmt = con.prepareStatement(sql);
             ResultSet rs = stmt.executeQuery();

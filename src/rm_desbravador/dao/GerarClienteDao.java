@@ -17,23 +17,36 @@ import rm_desbravador.utilitarios.PropertiesLoaderImpl;
  */
 public class GerarClienteDao {
 
-    public ResultSet listaDeClientes() {
+    public ResultSet listaDeClientes(boolean tipoBanco) {
+        String sql;
         Connection con;
         Conexao abrirCon = new Conexao();
-        String sql = "select codempresa,nomeempresa,razaosocial,cgc,inscest,cidade,"
-                + "complementonr,email,complemento,estado,cep,telefone, cobcidade,"
-                + "cobestado,cobcep, cobfone, nroendcorresp,cidadecorresp,"
-                + "estadocorresp,cepcorresp,fax,dtfunda,inscmunicipal,tipoemp,pais,"
-                + "codibge, suframa,cei,bairro, endereco, cobendereco, enderecocorresp,"
-                + "codpais"
-                + " from cadempresa"
-                + " where cgc <> '' limit 10";
+        if (tipoBanco) {
+            sql = "select codempresa,nomeempresa,razaosocial,cgc,inscest,cidade,"
+                    + "complementonr,email,complemento,estado,cep,telefone, cobcidade,"
+                    + "cobestado,cobcep, cobfone, nroendcorresp,cidadecorresp,"
+                    + "estadocorresp,cepcorresp,fax,dtfunda,inscmunicipal,tipoemp,pais,"
+                    + "codibge, suframa,cei,bairro, endereco, cobendereco, enderecocorresp,"
+                    + "codpais"
+                    + " from cadempresa";
+                    //+ " where cgc <> ' ' ";
+        } else {
+            sql = "select codempresa,nomeempresa,razaosocial,cgc,inscest,cidade,"
+                    + "complementonr,email,complemento,estado,cep,telefone, cobcidade,"
+                    + "cobestado,cobcep, cobfone, nroendcorresp,cidadecorresp,"
+                    + "estadocorresp,cepcorresp,fax,dtfunda,inscmunicipal,tipoemp,pais,"
+                    + "codibge, suframa,cei,bairro, endereco, cobendereco, enderecocorresp,"
+                    + "codpais"
+                    + " from cadempresa"
+                    + " where cgc <> '' limit 10";
+        }
         con = abrirCon.getConexao(
                 PropertiesLoaderImpl.getValor("servidor"),
                 PropertiesLoaderImpl.getValor("porta"),
                 PropertiesLoaderImpl.getValor("banco"),
                 PropertiesLoaderImpl.getValor("usuario"),
-                PropertiesLoaderImpl.getValor("senha"));
+                PropertiesLoaderImpl.getValor("senha"),
+                tipoBanco);
         try {
             PreparedStatement stmt = con.prepareStatement(sql);
             ResultSet rs = stmt.executeQuery();

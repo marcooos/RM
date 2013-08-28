@@ -34,7 +34,13 @@ public class UIPrincipal extends javax.swing.JFrame {
         jFTdataCliente.setText(PropertiesLoaderImpl.getValor("dataCliente"));
         jTFDiretorioTitulos.setText(PropertiesLoaderImpl.getValor("dirTitulos"));
         jFTdataTitulos.setText(PropertiesLoaderImpl.getValor("dataTitulos"));
+        if ("true".equals(PropertiesLoaderImpl.getValor("tipoBanco"))) {
+            jCBBanco.setSelectedIndex(0);
+        } else {
+            jCBBanco.setSelectedIndex(1);
+        }
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -44,6 +50,11 @@ public class UIPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
+        buttonGroup2 = new javax.swing.ButtonGroup();
+        buttonGroup3 = new javax.swing.ButtonGroup();
+        buttonGroup4 = new javax.swing.ButtonGroup();
+        buttonGroup5 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
@@ -85,6 +96,8 @@ public class UIPrincipal extends javax.swing.JFrame {
         jTFUsuario = new javax.swing.JTextField();
         jBSalvar = new javax.swing.JButton();
         jBFecharConf = new javax.swing.JButton();
+        jLabel14 = new javax.swing.JLabel();
+        jCBBanco = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -312,6 +325,15 @@ public class UIPrincipal extends javax.swing.JFrame {
             }
         });
 
+        jLabel14.setText("Conexão:");
+
+        jCBBanco.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "SQLServer", "PostGreSQL" }));
+        jCBBanco.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jCBBancoItemStateChanged(evt);
+            }
+        });
+
         org.jdesktop.layout.GroupLayout jPanel5Layout = new org.jdesktop.layout.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
@@ -346,12 +368,21 @@ public class UIPrincipal extends javax.swing.JFrame {
                         .addContainerGap())
                     .add(jPanel5Layout.createSequentialGroup()
                         .add(jScrollPane3, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 723, Short.MAX_VALUE)
-                        .add(6, 6, 6))))
+                        .add(6, 6, 6))
+                    .add(jPanel5Layout.createSequentialGroup()
+                        .add(jLabel14)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                        .add(jCBBanco, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .add(0, 0, Short.MAX_VALUE))))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(jPanel5Layout.createSequentialGroup()
-                .addContainerGap()
+                .add(7, 7, 7)
+                .add(jPanel5Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(jLabel14)
+                    .add(jCBBanco, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(jPanel5Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(jLabel7, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 28, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                     .add(jTFServidor, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
@@ -379,7 +410,7 @@ public class UIPrincipal extends javax.swing.JFrame {
                         .add(jLabel9))
                     .add(jBSalvar, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .add(jBFecharConf, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 12, Short.MAX_VALUE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .add(jScrollPane3, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 360, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .add(33, 33, 33))
         );
@@ -454,9 +485,16 @@ public class UIPrincipal extends javax.swing.JFrame {
 
     private void jBTestarConexaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBTestarConexaoActionPerformed
         Conexao abrirCon = new Conexao();
+        boolean tipoBanco;
+        if ("true".equals(PropertiesLoaderImpl.getValor("tipoBanco"))) {
+            tipoBanco = true;
+        } else {
+            tipoBanco = false;
+        }
         String strPass = new String(jPFSenha.getPassword()).trim();
         abrirCon.getConexao(jTFServidor.getText(), jTFPorta.getText(), jTFBanco.getText(),
-                jTFUsuario.getText(), strPass);
+                jTFUsuario.getText(), strPass,
+                tipoBanco);
         jTARetornoConfig.setText(abrirCon.getMensagemRet() + "\n");
     }//GEN-LAST:event_jBTestarConexaoActionPerformed
 
@@ -472,6 +510,11 @@ public class UIPrincipal extends javax.swing.JFrame {
             PropertiesLoaderImpl.setValor("banco", jTFBanco.getText());
             PropertiesLoaderImpl.setValor("usuario", jTFUsuario.getText());
             PropertiesLoaderImpl.setValor("senha", strPass);
+            if (jCBBanco.getSelectedIndex() == 0) {
+                PropertiesLoaderImpl.setValor("tipoBanco", "true");
+            } else {
+                PropertiesLoaderImpl.setValor("tipoBanco", "false");
+            }
             JOptionPane.showMessageDialog(null, "Configurações salvas", "Informação", JOptionPane.WARNING_MESSAGE);
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(rootPane, "Problema al salvar as configurações\n"
@@ -483,18 +526,38 @@ public class UIPrincipal extends javax.swing.JFrame {
     private void jBExportarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBExportarClienteActionPerformed
         try {
             UIPrincipalControler uipc = new UIPrincipalControler();
+            boolean tipoBanco;
+            if ("true".equals(PropertiesLoaderImpl.getValor("tipoBanco"))) {
+                tipoBanco = true;
+            } else {
+                tipoBanco = false;
+            }
             Date data = new Date(jFTdataCliente.getText());
-            PropertiesLoaderImpl.setValor("dataCliente",jFTdataCliente.getText());
-            jTAClienteRetorno.setText(uipc.gerarAquivoClientes(data, jTFDiretorioCliente.getText()));
-            JOptionPane.showMessageDialog(null, "Arquivo exportado\n" +
-                    jTFDiretorioCliente.getText()+data.toString()+".txt",
-                    "Informação", JOptionPane.WARNING_MESSAGE);            
+            PropertiesLoaderImpl.setValor("dataCliente", jFTdataCliente.getText());
+            jTAClienteRetorno.setText(uipc.gerarAquivoClientes(data, jTFDiretorioCliente.getText(),
+                    tipoBanco));
+            JOptionPane.showMessageDialog(null, "Arquivo exportado\n"
+                    + jTFDiretorioCliente.getText() + data.toString() + ".txt",
+                    "Informação", JOptionPane.WARNING_MESSAGE);
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(rootPane, "Problema al exportar arquivo\n"
                     + ex, "Informação", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jBExportarClienteActionPerformed
+
+    private void jCBBancoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCBBancoItemStateChanged
+        if (jCBBanco.getSelectedIndex() == 0) {
+            PropertiesLoaderImpl.setValor("tipoBanco", "true");
+        } else {
+            PropertiesLoaderImpl.setValor("tipoBanco", "false");
+        }
+    }//GEN-LAST:event_jCBBancoItemStateChanged
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.ButtonGroup buttonGroup2;
+    private javax.swing.ButtonGroup buttonGroup3;
+    private javax.swing.ButtonGroup buttonGroup4;
+    private javax.swing.ButtonGroup buttonGroup5;
     private javax.swing.JButton jBBuscarDirCliente;
     private javax.swing.JButton jBBuscarDirTitulo;
     private javax.swing.JButton jBExportarCliente;
@@ -504,6 +567,7 @@ public class UIPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton jBSalvar;
     private javax.swing.JButton jBTestarConexao;
     private javax.swing.JButton jButton4;
+    private javax.swing.JComboBox jCBBanco;
     private javax.swing.JFormattedTextField jFTdataCliente;
     private javax.swing.JFormattedTextField jFTdataTitulos;
     private javax.swing.JLabel jLabel1;
@@ -511,6 +575,7 @@ public class UIPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

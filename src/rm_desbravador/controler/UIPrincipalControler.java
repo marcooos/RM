@@ -14,9 +14,9 @@ import rm_desbravador.negocio.GerarArquivoCliente;
 public class UIPrincipalControler {
     String mensagem;
     
-    public String gerarAquivoClientes(Date data, String caminho) {
+    public String gerarAquivoClientes(Date data, String caminho, boolean tipoBanco) {
         GerarArquivoCliente gerarArquivoCliente = new GerarArquivoCliente();
-        gerarArquivoCliente.gerarArquivoCliente(data,caminho);        
+        gerarArquivoCliente.gerarArquivoCliente(data,caminho,tipoBanco);        
         return gerarArquivoCliente.getMensagem();
     }
 }

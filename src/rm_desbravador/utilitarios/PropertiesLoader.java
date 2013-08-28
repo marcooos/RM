@@ -31,6 +31,7 @@ public class PropertiesLoader {
                                 props.setProperty("dataCliente", "");
                                 props.setProperty("dirTitulos", "");
                                 props.setProperty("dataTitulos", "");
+                                props.setProperty("tipoBanco", "true");
 				props.store(outPropFile, "Arquivo de propriedades");
 				outPropFile.close();
 				in = new FileInputStream(nomeDoProperties);

@@ -25,15 +25,21 @@ public class Conexao {
         return mensagemRet;
     }
 
-    public Connection getConexao(String servidor, String porta, String banco, String usuario, String senha) {
+    public Connection getConexao(String servidor, String porta, String banco,
+            String usuario, String senha, boolean tipoBanco) {
 
         mensagemRet = "-------- PostgreSQL "
                 + "JDBC teste de conexão ------------";
 
         try {
-
-            Class.forName("org.postgresql.Driver");
-
+            if (tipoBanco) {
+                //SQLServer
+                Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            } else {
+                 //PostGreSQL
+                Class.forName("org.postgresql.Driver");
+            }
+             
         } catch (ClassNotFoundException e) {
             mensagemRet = "";
             mensagemRet = "Driver JDBC não localizado "
@@ -48,10 +54,21 @@ public class Conexao {
         connection = null;
 
         try {
-
-            connection = DriverManager.getConnection(
+            if (tipoBanco) {
+                //SQLServer
+                connection = DriverManager.getConnection(
+                    "jdbc:sqlserver://"
+                    + servidor + ":" + porta + ";" +
+                    "databaseName="+banco + ";"+
+                    "user="+usuario+";" +
+                    "password="+senha+";");
+            
+            } else {
+                //PostgreSQL
+             connection = DriverManager.getConnection(
                     "jdbc:postgresql://"
-                    + servidor + ":" + porta + "/" + banco + "", usuario, senha);
+                    + servidor + ":" + porta + "/" + banco + "", usuario, senha);   
+            }            
 
         } catch (SQLException e) {
 

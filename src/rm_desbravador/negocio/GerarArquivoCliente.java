@@ -18,7 +18,7 @@ import rm_desbravador.utilitarios.GravarArquivo;
 public class GerarArquivoCliente {
     String mensagem;
 
-    public boolean gerarArquivoCliente(Date data, String caminho) {        
+    public boolean gerarArquivoCliente(Date data, String caminho,boolean tipoBanco) {        
         mensagem = "";
         GravarArquivo gravar = new GravarArquivo();
         GerarLinhaClienteC gerarLinhaClienteC = new GerarLinhaClienteC();        
@@ -36,8 +36,8 @@ public class GerarArquivoCliente {
         try {
             GerarClienteDao clienteDao = new GerarClienteDao();
             GerarFornecedorDao fornecedorDao = new GerarFornecedorDao();
-            ResultSet rsCli = clienteDao.listaDeClientes();
-            ResultSet rsFor = fornecedorDao.listaDeFornecedores();            
+            ResultSet rsCli = clienteDao.listaDeClientes(tipoBanco);
+            ResultSet rsFor = fornecedorDao.listaDeFornecedores(tipoBanco);            
             //Montar Arquivo Clinte
             //LinhaC
             while(rsCli.next()) {
