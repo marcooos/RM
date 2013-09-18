@@ -2,9 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package rm_desbravador;
-
-import rm_desbravador.visao.UIPrincipal;
+package rm_desbravador.visao;
 
 
 /**

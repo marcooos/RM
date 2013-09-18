@@ -22,11 +22,11 @@ public class PropertiesLoader {
 		} catch (FileNotFoundException e1) {
 			try {
 				outPropFile = new FileOutputStream(nomeDoProperties);
-				props.setProperty("servidor", "127.0.0.1");
-                                props.setProperty("porta", "7060");
-                                props.setProperty("banco", "windes4_regente");
-                                props.setProperty("usuario", "dah");
-                                props.setProperty("senha", "era.a");
+				props.setProperty("servidor", " ");
+                                props.setProperty("porta", " ");
+                                props.setProperty("banco", " ");
+                                props.setProperty("usuario", " ");
+                                props.setProperty("senha", " ");
                                 props.setProperty("dirCliente", "");
                                 props.setProperty("dataCliente", "");
                                 props.setProperty("dirTitulos", "");

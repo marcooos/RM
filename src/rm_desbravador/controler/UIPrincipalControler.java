@@ -6,6 +6,7 @@ package rm_desbravador.controler;
 
 import java.util.Date;
 import rm_desbravador.negocio.GerarArquivoCliente;
+import rm_desbravador.negocio.GerarArquivoTitulos;
 
 /**
  *
@@ -18,5 +19,11 @@ public class UIPrincipalControler {
         GerarArquivoCliente gerarArquivoCliente = new GerarArquivoCliente();
         gerarArquivoCliente.gerarArquivoCliente(data,caminho,tipoBanco);        
         return gerarArquivoCliente.getMensagem();
+    }
+    
+    public String gerarAquivoTitulos(Date data, String caminho, boolean tipoBanco) {
+        GerarArquivoTitulos gerarArquivoTitulos = new GerarArquivoTitulos();
+        gerarArquivoTitulos.gerarArquivoTitulos(data,caminho,tipoBanco);        
+        return gerarArquivoTitulos.getMensagem();
     }
 }

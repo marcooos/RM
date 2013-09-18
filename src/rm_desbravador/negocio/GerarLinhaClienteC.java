@@ -4,6 +4,7 @@
  */
 package rm_desbravador.negocio;
 
+import com.microsoft.sqlserver.jdbc.SQLServerException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import org.postgresql.util.PSQLException;
@@ -47,16 +48,19 @@ public class GerarLinhaClienteC {
             //Inscrição Estadual
             mensagem = mensagem + tCA.gerarTipoCampoA(rs.getString("inscest"), 20);
             //Cliente (1) / Fornecedor (2)
+            //Cliente solicitou que seja sempre enviado Fixo 3
             try {
                 clifor = rs.getBoolean("situacao");
-            } catch (PSQLException ex) {
+            } catch (PSQLException | SQLServerException ex) {
                 clifor = true;
                 System.out.println(ex);
             }
             if (clifor) {
-                mensagem = mensagem + tCF.gerarTipoCampoF("    1");
+                mensagem = mensagem + tCF.gerarTipoCampoF("    3");
+                //mensagem = mensagem + tCF.gerarTipoCampoF("    1");
             } else {
-                mensagem = mensagem + tCF.gerarTipoCampoF("    2");
+                mensagem = mensagem + tCF.gerarTipoCampoF("    3");
+                //mensagem = mensagem + tCF.gerarTipoCampoF("    2");
             }
             
             //Não utilizado
@@ -78,7 +82,7 @@ public class GerarLinhaClienteC {
             //Não utilizado
             mensagem = mensagem + tCNU.gerarTipoCampoNU(40);
             //Número do pagamento
-            mensagem = mensagem + tCNU.gerarTipoCampoNU(8);
+            mensagem = mensagem + tCA.gerarTipoCampoA(rs.getString("complementonr"), 8);
             //Complemento do pagamento
             mensagem = mensagem + tCNU.gerarTipoCampoNU(20);            
             //Não utilizado

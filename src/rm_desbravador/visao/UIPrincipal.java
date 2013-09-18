@@ -4,9 +4,12 @@
  */
 package rm_desbravador.visao;
 
+import java.text.ParseException;
 import java.util.Date;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.text.DefaultFormatterFactory;
+import javax.swing.text.MaskFormatter;
 import rm_desbravador.controler.UIPrincipalControler;
 import rm_desbravador.utilitarios.Conexao;
 import rm_desbravador.utilitarios.PropertiesLoaderImpl;
@@ -31,6 +34,12 @@ public class UIPrincipal extends javax.swing.JFrame {
         jTFUsuario.setText(PropertiesLoaderImpl.getValor("usuario"));
         jPFSenha.setText(PropertiesLoaderImpl.getValor("senha"));
         jTFDiretorioCliente.setText(PropertiesLoaderImpl.getValor("dirCliente"));
+        try {
+            jFTdataCliente.setFormatterFactory(new DefaultFormatterFactory(
+                    new MaskFormatter("##/##/####")));
+        } catch (ParseException ex) {
+            System.out.println(ex);
+        }
         jFTdataCliente.setText(PropertiesLoaderImpl.getValor("dataCliente"));
         jTFDiretorioTitulos.setText(PropertiesLoaderImpl.getValor("dirTitulos"));
         jFTdataTitulos.setText(PropertiesLoaderImpl.getValor("dataTitulos"));
@@ -221,6 +230,11 @@ public class UIPrincipal extends javax.swing.JFrame {
         jScrollPane2.setViewportView(jTATitulosRetorno);
 
         jButton4.setText("Exportar");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         jBFecharTitulo.setText("Fechar");
         jBFecharTitulo.addActionListener(new java.awt.event.ActionListener() {
@@ -552,6 +566,28 @@ public class UIPrincipal extends javax.swing.JFrame {
             PropertiesLoaderImpl.setValor("tipoBanco", "false");
         }
     }//GEN-LAST:event_jCBBancoItemStateChanged
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        try {
+            UIPrincipalControler uipc = new UIPrincipalControler();
+            boolean tipoBanco;
+            if ("true".equals(PropertiesLoaderImpl.getValor("tipoBanco"))) {
+                tipoBanco = true;
+            } else {
+                tipoBanco = false;
+            }
+            Date data = new Date(jFTdataTitulos.getText());
+            PropertiesLoaderImpl.setValor("dataTitulos", jFTdataTitulos.getText());
+            jTATitulosRetorno.setText(uipc.gerarAquivoTitulos(data, jTFDiretorioTitulos.getText(),
+                    tipoBanco));
+            JOptionPane.showMessageDialog(null, "Arquivo exportado\n"
+                    + jTFDiretorioTitulos.getText() + data.toString() + ".txt",
+                    "Informação", JOptionPane.WARNING_MESSAGE);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(rootPane, "Problema al exportar arquivo\n"
+                    + ex, "Informação", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jButton4ActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;

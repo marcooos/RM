@@ -35,7 +35,7 @@ public class GerarClienteDao {
                     + "complementonr,email,complemento,estado,cep,telefone, cobcidade,"
                     + "cobestado,cobcep, cobfone, nroendcorresp,cidadecorresp,"
                     + "estadocorresp,cepcorresp,fax,dtfunda,inscmunicipal,tipoemp,pais,"
-                    + "codibge, suframa,cei,bairro, endereco, cobendereco, enderecocorresp,"
+                    + "codibge, suframa,cei,bairro, endereco, cobendereco, enderecocorresp,"                
                     + "codpais"
                     + " from cadempresa"
                     + " where cgc <> '' limit 10";
