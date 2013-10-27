@@ -28,7 +28,7 @@ public class GerarFornecedorDao {
                     + "estado as estadocorresp,cep as cepcorresp,fax,datareg as dtfunda,inscmunic as inscmunicipal,'F' as tipoemp,pais,"
                     + "codibge, suframa,' ' as cei,bairro, endereco, endereco as cobendereco, endereco as enderecocorresp,codpais,situacao"
                     + " from cadfornec "
-                    + " where cgc <> ''";
+                    + " where cgc <> '' and codhotel = 1";
         } else {
             sql = "select codfornec as codempresa,nomefornec as nomeempresa,razaosocial,cgc,inscest,cidade,"
                     + "' ' as complementonr,email,' ' as complemento,estado,cep,telefone1 as telefone, cidade as cobcidade,"
@@ -36,7 +36,7 @@ public class GerarFornecedorDao {
                     + "estado as estadocorresp,cep as cepcorresp,fax,datareg as dtfunda,inscmunic as inscmunicipal,'F' as tipoemp,pais,"
                     + "codibge, suframa,' ' as cei,bairro, endereco, endereco as cobendereco, endereco as enderecocorresp,codpais,situacao"
                     + " from cadfornec "
-                    + " where cgc <> '' limit 10";
+                    + " where cgc <> '' and codhotel = 1 limit 1";
         }
         con = abrirCon.getConexao(
                 PropertiesLoaderImpl.getValor("servidor"),

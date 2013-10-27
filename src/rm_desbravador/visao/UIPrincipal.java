@@ -5,6 +5,7 @@
 package rm_desbravador.visao;
 
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -36,6 +37,12 @@ public class UIPrincipal extends javax.swing.JFrame {
         jTFDiretorioCliente.setText(PropertiesLoaderImpl.getValor("dirCliente"));
         try {
             jFTdataCliente.setFormatterFactory(new DefaultFormatterFactory(
+                    new MaskFormatter("##/##/####")));
+        } catch (ParseException ex) {
+            System.out.println(ex);
+        }
+        try {
+            jFTdataTitulos.setFormatterFactory(new DefaultFormatterFactory(
                     new MaskFormatter("##/##/####")));
         } catch (ParseException ex) {
             System.out.println(ex);
@@ -86,7 +93,7 @@ public class UIPrincipal extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTATitulosRetorno = new javax.swing.JTextArea();
-        jButton4 = new javax.swing.JButton();
+        jBExportarTitulos = new javax.swing.JButton();
         jBFecharTitulo = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
@@ -109,12 +116,17 @@ public class UIPrincipal extends javax.swing.JFrame {
         jCBBanco = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Exportador DSL");
 
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setMaximumSize(new java.awt.Dimension(770, 660));
         jPanel1.setMinimumSize(new java.awt.Dimension(770, 660));
 
+        jTabbedPane1.setBackground(new java.awt.Color(255, 255, 255));
         jTabbedPane1.setMaximumSize(new java.awt.Dimension(756, 712));
         jTabbedPane1.setMinimumSize(new java.awt.Dimension(756, 712));
+
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel1.setText("Data da última exportação: ");
 
@@ -208,6 +220,7 @@ public class UIPrincipal extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Clientes", jPanel2);
 
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setPreferredSize(new java.awt.Dimension(735, 610));
 
         jLabel4.setText("Data da última exportação: ");
@@ -229,10 +242,10 @@ public class UIPrincipal extends javax.swing.JFrame {
         jTATitulosRetorno.setRows(5);
         jScrollPane2.setViewportView(jTATitulosRetorno);
 
-        jButton4.setText("Exportar");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        jBExportarTitulos.setText("Exportar");
+        jBExportarTitulos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                jBExportarTitulosActionPerformed(evt);
             }
         });
 
@@ -266,7 +279,7 @@ public class UIPrincipal extends javax.swing.JFrame {
                     .add(jPanel3Layout.createSequentialGroup()
                         .add(jLabel6)
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .add(jButton4, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 127, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .add(jBExportarTitulos, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 127, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                         .add(jBFecharTitulo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 117, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                     .add(jScrollPane2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 723, Short.MAX_VALUE))
@@ -292,13 +305,15 @@ public class UIPrincipal extends javax.swing.JFrame {
                     .add(jPanel3Layout.createSequentialGroup()
                         .add(jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING, false)
                             .add(jBFecharTitulo, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 49, Short.MAX_VALUE)
-                            .add(jButton4, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .add(jBExportarTitulos, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .add(12, 12, 12)))
                 .add(jScrollPane2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 465, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
         jTabbedPane1.addTab("Títulos", jPanel3);
+
+        jPanel5.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel7.setText("Servidor:");
 
@@ -546,7 +561,9 @@ public class UIPrincipal extends javax.swing.JFrame {
             } else {
                 tipoBanco = false;
             }
-            Date data = new Date(jFTdataCliente.getText());
+            Date data;
+            SimpleDateFormat formatField = new SimpleDateFormat("dd/MM/yyyy");
+            data = formatField.parse(jFTdataCliente.getText());
             PropertiesLoaderImpl.setValor("dataCliente", jFTdataCliente.getText());
             jTAClienteRetorno.setText(uipc.gerarAquivoClientes(data, jTFDiretorioCliente.getText(),
                     tipoBanco));
@@ -567,7 +584,7 @@ public class UIPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jCBBancoItemStateChanged
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void jBExportarTitulosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBExportarTitulosActionPerformed
         try {
             UIPrincipalControler uipc = new UIPrincipalControler();
             boolean tipoBanco;
@@ -576,7 +593,9 @@ public class UIPrincipal extends javax.swing.JFrame {
             } else {
                 tipoBanco = false;
             }
-            Date data = new Date(jFTdataTitulos.getText());
+            Date data;
+            SimpleDateFormat formatField = new SimpleDateFormat("dd/MM/yyyy");             
+            data = formatField.parse(jFTdataTitulos.getText());
             PropertiesLoaderImpl.setValor("dataTitulos", jFTdataTitulos.getText());
             jTATitulosRetorno.setText(uipc.gerarAquivoTitulos(data, jTFDiretorioTitulos.getText(),
                     tipoBanco));
@@ -587,7 +606,7 @@ public class UIPrincipal extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane, "Problema al exportar arquivo\n"
                     + ex, "Informação", JOptionPane.ERROR_MESSAGE);
         }
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_jBExportarTitulosActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
@@ -597,12 +616,12 @@ public class UIPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton jBBuscarDirCliente;
     private javax.swing.JButton jBBuscarDirTitulo;
     private javax.swing.JButton jBExportarCliente;
+    private javax.swing.JButton jBExportarTitulos;
     private javax.swing.JButton jBFecharCliente;
     private javax.swing.JButton jBFecharConf;
     private javax.swing.JButton jBFecharTitulo;
     private javax.swing.JButton jBSalvar;
     private javax.swing.JButton jBTestarConexao;
-    private javax.swing.JButton jButton4;
     private javax.swing.JComboBox jCBBanco;
     private javax.swing.JFormattedTextField jFTdataCliente;
     private javax.swing.JFormattedTextField jFTdataTitulos;

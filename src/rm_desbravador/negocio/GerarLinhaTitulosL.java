@@ -4,17 +4,14 @@
  */
 package rm_desbravador.negocio;
 
-import com.microsoft.sqlserver.jdbc.SQLServerException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import org.postgresql.util.PSQLException;
 import rm_desbravador.validadores.TipoCampoA;
 import rm_desbravador.validadores.TipoCampoData;
 import rm_desbravador.validadores.TipoCampoF;
 import rm_desbravador.validadores.TipoCampoN;
 import rm_desbravador.validadores.TipoCampoNU;
 import rm_desbravador.validadores.TipoCampoVF;
-import rm_desbravador.validadores.TipoPessoa;
 
 /**
  *
@@ -26,24 +23,23 @@ public class GerarLinhaTitulosL {
         TipoCampoF tCF = new TipoCampoF();
         TipoCampoA tCA = new TipoCampoA();
         TipoCampoData tCData = new TipoCampoData();
-        TipoCampoN tCN = new TipoCampoN();
         TipoCampoNU tCNU = new TipoCampoNU();
-        TipoCampoVF tCVF = new TipoCampoVF();
-        TipoPessoa tP = new TipoPessoa();
+        TipoCampoN tCN = new TipoCampoN();
+        TipoCampoVF tCVF = new TipoCampoVF();        
         String mensagem = "";
         try {
             //Fixo
             mensagem = mensagem + tCF.gerarTipoCampoF("L");
             //Código banco CNAB
-            mensagem = mensagem + tCNU.gerarTipoCampoNU(3);
+            mensagem = mensagem + tCNU.gerarTipoCampoNU(3);            
             //Código da filial
-            mensagem = mensagem + tCN.gerarTipoCampoNZerado(4);
+            mensagem = mensagem + tCN.gerarTipoCampoN(3911,4);
             //Código fornecedor
-            mensagem = mensagem + tCA.gerarTipoCampoA(rs.getString("clifor"), 25);
+            mensagem = mensagem + tCA.gerarTipoCampoA(rs.getString("cgc"), 25);            
             //Código do tipo de Documento
-            mensagem = mensagem + tCNU.gerarTipoCampoNU(10);
+            mensagem = mensagem + tCA.gerarTipoCampoA("ROUT",10);
             //Número do Documento
-            mensagem = mensagem + tCNU.gerarTipoCampoNU(40);
+            mensagem = mensagem + tCA.gerarTipoCampoA(rs.getString("codrazao"),40);
             //Não utilizado (Espaços)
             mensagem = mensagem + tCNU.gerarTipoCampoNU(3);
             //Status do Faturamento
@@ -74,9 +70,9 @@ public class GerarLinhaTitulosL {
             //Código do Centro de Custo
             mensagem = mensagem + tCNU.gerarTipoCampoNU(25);
             //Data de Vencimento
-            mensagem = mensagem + tCData.gerarTipoCampoData(rs.getDate("dtvencto"));
+            mensagem = mensagem + tCData.gerarTipoCampoDataSemFormatacao(rs.getDate("dtvencto"));
             //Data de Emissão
-            mensagem = mensagem + tCData.gerarTipoCampoData(rs.getDate("dtemissao"));
+            mensagem = mensagem + tCData.gerarTipoCampoDataSemFormatacao(rs.getDate("dtemissao"));
             //Não utilizado (Espaços)
             mensagem = mensagem + tCNU.gerarTipoCampoNU(6);
             //Data de Previsão de Baixa
@@ -103,6 +99,10 @@ public class GerarLinhaTitulosL {
             mensagem = mensagem + tCNU.gerarTipoCampoNU(10);
             //Valor Original
             mensagem = mensagem + tCVF.gerarTipoCampoVF(rs.getDouble("valorbruto"), 18);
+            //Não utilizar
+            mensagem = mensagem + tCNU.gerarTipoCampoNU(378);
+            //Coligada
+            mensagem = mensagem + tCN.gerarTipoCampoNZerado(4);
 
         } catch (SQLException ex) {
             System.out.println(ex);

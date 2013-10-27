@@ -51,7 +51,10 @@ public class GerarLinhaClienteC {
             //Cliente solicitou que seja sempre enviado Fixo 3
             try {
                 clifor = rs.getBoolean("situacao");
-            } catch (PSQLException | SQLServerException ex) {
+            } catch (PSQLException ex) {
+                clifor = true;
+                System.out.println(ex);
+            } catch (SQLServerException ex) {
                 clifor = true;
                 System.out.println(ex);
             }

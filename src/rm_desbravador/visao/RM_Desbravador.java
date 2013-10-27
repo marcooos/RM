@@ -4,7 +4,7 @@
  */
 package rm_desbravador.visao;
 
-
+import javax.swing.UIManager;
 /**
  *
  * @author marcos
@@ -15,11 +15,19 @@ public class RM_Desbravador {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        UIPrincipal uip = new UIPrincipal();
-        uip.iniciarInterface();
-        uip.setVisible(true);
-       // GerarArquivoCliente gerarArquivoCliente = new GerarArquivoCliente();
-       // System.out.println(gerarArquivoCliente.gerarArquivoCliente());                
-        
+        try {
+            //UIManager.setLookAndFeel("com.jtattoo.plaf.acryl.AcrylLookAndFeel");
+            UIManager.setLookAndFeel("com.jtattoo.plaf.mint.MintLookAndFeel");
+            UIPrincipal uip = new UIPrincipal();
+            uip.iniciarInterface();
+            uip.pack();
+            uip.setLocationRelativeTo(null);
+            uip.setVisible(true);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        // GerarArquivoCliente gerarArquivoCliente = new GerarArquivoCliente();
+        // System.out.println(gerarArquivoCliente.gerarArquivoCliente());                
+
     }
 }

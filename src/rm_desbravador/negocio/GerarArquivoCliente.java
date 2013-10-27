@@ -6,6 +6,7 @@ package rm_desbravador.negocio;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Calendar;
 import java.util.Date;
 import rm_desbravador.dao.GerarClienteDao;
 import rm_desbravador.dao.GerarFornecedorDao;
@@ -21,6 +22,9 @@ public class GerarArquivoCliente {
     public boolean gerarArquivoCliente(Date data, String caminho,boolean tipoBanco) {        
         mensagem = "";
         GravarArquivo gravar = new GravarArquivo();
+        /*Calendar calendarData = Calendar.getInstance();
+        calendarData.setTime(data);
+        calendarData.add(Calendar.DATE,1);*/
         GerarLinhaClienteC gerarLinhaClienteC = new GerarLinhaClienteC();        
         /*GerarLinhaClienteM gerarLinhaClienteM = new GerarLinhaClienteM();
         GerarLinhaClienteD gerarLinhaClienteD = new GerarLinhaClienteD();
@@ -36,7 +40,7 @@ public class GerarArquivoCliente {
         try {
             GerarClienteDao clienteDao = new GerarClienteDao();
             GerarFornecedorDao fornecedorDao = new GerarFornecedorDao();
-            ResultSet rsCli = clienteDao.listaDeClientes(tipoBanco);
+            ResultSet rsCli = clienteDao.listaDeClientes(tipoBanco,data);//calendarData.getTime());
             ResultSet rsFor = fornecedorDao.listaDeFornecedores(tipoBanco);            
             //Montar Arquivo Clinte
             //LinhaC
