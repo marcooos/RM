@@ -17,7 +17,7 @@ public class RM_Desbravador {
     public static void main(String[] args) {
         try {
             //UIManager.setLookAndFeel("com.jtattoo.plaf.acryl.AcrylLookAndFeel");
-            UIManager.setLookAndFeel("com.jtattoo.plaf.mint.MintLookAndFeel");
+            UIManager.setLookAndFeel("com.jtattoo.plaf.acryl.AcrylLookAndFeel");
             UIPrincipal uip = new UIPrincipal();
             uip.iniciarInterface();
             uip.pack();

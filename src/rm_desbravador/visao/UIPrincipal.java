@@ -6,6 +6,7 @@ package rm_desbravador.visao;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -277,9 +278,13 @@ public class UIPrincipal extends javax.swing.JFrame {
                                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                                 .add(jBBuscarDirTitulo, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                     .add(jPanel3Layout.createSequentialGroup()
-                        .add(jLabel6)
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .add(jBExportarTitulos, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 127, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .add(jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                            .add(jPanel3Layout.createSequentialGroup()
+                                .add(jLabel6)
+                                .add(0, 0, Short.MAX_VALUE))
+                            .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanel3Layout.createSequentialGroup()
+                                .add(0, 0, Short.MAX_VALUE)
+                                .add(jBExportarTitulos, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 132, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                         .add(jBFecharTitulo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 117, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                     .add(jScrollPane2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 723, Short.MAX_VALUE))
@@ -298,16 +303,12 @@ public class UIPrincipal extends javax.swing.JFrame {
                     .add(jLabel5, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 28, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                     .add(jBBuscarDirTitulo))
                 .add(18, 18, 18)
-                .add(jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .add(jLabel6)
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED))
-                    .add(jPanel3Layout.createSequentialGroup()
-                        .add(jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING, false)
-                            .add(jBFecharTitulo, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 49, Short.MAX_VALUE)
-                            .add(jBExportarTitulos, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .add(12, 12, 12)))
-                .add(jScrollPane2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 465, Short.MAX_VALUE)
+                .add(jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
+                    .add(jLabel6)
+                    .add(jBFecharTitulo, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 49, Short.MAX_VALUE)
+                    .add(jBExportarTitulos, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .add(jScrollPane2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 472, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -495,7 +496,11 @@ public class UIPrincipal extends javax.swing.JFrame {
         arquivo.setDialogTitle("Selecione o diretório de destino");
         arquivo.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         arquivo.showOpenDialog(rootPane);
-        jTFDiretorioCliente.setText(arquivo.getSelectedFile().getAbsolutePath());
+        try {
+            jTFDiretorioCliente.setText(arquivo.getSelectedFile().getAbsolutePath());
+        } catch (java.lang.NullPointerException e) {
+            jTFDiretorioCliente.setText(PropertiesLoaderImpl.getValor("dirCliente"));
+        }
         PropertiesLoaderImpl.setValor("dirCliente", jTFDiretorioCliente.getText());
     }//GEN-LAST:event_jBBuscarDirClienteActionPerformed
 
@@ -508,7 +513,11 @@ public class UIPrincipal extends javax.swing.JFrame {
         arquivo.setDialogTitle("Selecione o diretório de destino");
         arquivo.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         arquivo.showOpenDialog(rootPane);
-        jTFDiretorioTitulos.setText(arquivo.getSelectedFile().getAbsolutePath());
+        try {
+            jTFDiretorioTitulos.setText(arquivo.getSelectedFile().getAbsolutePath());
+        } catch (java.lang.NullPointerException e) {
+            jTFDiretorioTitulos.setText(PropertiesLoaderImpl.getValor("dirTitulos"));
+        }
         PropertiesLoaderImpl.setValor("dirTitulos", jTFDiretorioTitulos.getText());
     }//GEN-LAST:event_jBBuscarDirTituloActionPerformed
 
@@ -570,6 +579,13 @@ public class UIPrincipal extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Arquivo exportado\n"
                     + jTFDiretorioCliente.getText() + data.toString() + ".txt",
                     "Informação", JOptionPane.WARNING_MESSAGE);
+            String dataAtual;
+            Calendar calendario = Calendar.getInstance();
+            dataAtual = Integer.toString(calendario.get(Calendar.DAY_OF_MONTH)) + '/' 
+                    + Integer.toString(calendario.get(Calendar.MONTH)+1) + '/' 
+                    + Integer.toString(calendario.get(Calendar.YEAR));
+            PropertiesLoaderImpl.setValor("dataCliente", dataAtual);
+            jFTdataCliente.setText(PropertiesLoaderImpl.getValor("dataCliente"));
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(rootPane, "Problema al exportar arquivo\n"
                     + ex, "Informação", JOptionPane.ERROR_MESSAGE);
@@ -594,7 +610,7 @@ public class UIPrincipal extends javax.swing.JFrame {
                 tipoBanco = false;
             }
             Date data;
-            SimpleDateFormat formatField = new SimpleDateFormat("dd/MM/yyyy");             
+            SimpleDateFormat formatField = new SimpleDateFormat("dd/MM/yyyy");
             data = formatField.parse(jFTdataTitulos.getText());
             PropertiesLoaderImpl.setValor("dataTitulos", jFTdataTitulos.getText());
             jTATitulosRetorno.setText(uipc.gerarAquivoTitulos(data, jTFDiretorioTitulos.getText(),
@@ -602,6 +618,13 @@ public class UIPrincipal extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Arquivo exportado\n"
                     + jTFDiretorioTitulos.getText() + data.toString() + ".txt",
                     "Informação", JOptionPane.WARNING_MESSAGE);
+            String dataAtual;
+            Calendar calendario = Calendar.getInstance();
+            dataAtual = Integer.toString(calendario.get(Calendar.DAY_OF_MONTH)) + '/' 
+                    + Integer.toString(calendario.get(Calendar.MONTH)+1) + '/' 
+                    + Integer.toString(calendario.get(Calendar.YEAR));
+            PropertiesLoaderImpl.setValor("dataTitulos", dataAtual);
+            jFTdataTitulos.setText(PropertiesLoaderImpl.getValor("dataTitulos"));
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(rootPane, "Problema al exportar arquivo\n"
                     + ex, "Informação", JOptionPane.ERROR_MESSAGE);
